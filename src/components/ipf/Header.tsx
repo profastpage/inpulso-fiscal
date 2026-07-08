@@ -13,7 +13,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "Inicio", href: "/", active: true },
-  { label: "Nosotros", href: "#", active: false },
+  { label: "Nosotros", href: "/nosotros", active: false },
 ];
 
 const serviceLinks = [
@@ -21,13 +21,13 @@ const serviceLinks = [
     icon: <FileText className="w-4 h-4 text-brand-600" />,
     label: "Semana Fiscal",
     desc: "Publicaciones y análisis técnico",
-    href: "#",
+    href: "/reportes",
   },
   {
     icon: <GraduationCap className="w-4 h-4 text-brand-600" />,
     label: "Cursos",
     desc: "Formación especializada",
-    href: "#",
+    href: "/cursos",
   },
 ];
 
@@ -122,7 +122,7 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
-            <a href="#" className="nav-link">
+            <a href="/contacto" className="nav-link">
               Contacto
             </a>
           </nav>
@@ -135,7 +135,7 @@ export default function Header() {
             >
               Iniciar sesión
             </button>
-            <a href="#" className="site-header__subscribe">
+            <a href="/suscripciones" className="site-header__subscribe">
               <Sparkles className="w-4 h-4 text-white" />
               Suscribirse
             </a>
@@ -197,7 +197,7 @@ export default function Header() {
                 Nuestros Servicios
               </a>
               <a
-                href="#"
+                href="/contacto"
                 className="mobile-drawer__link"
                 onClick={closeMobile}
               >
@@ -213,7 +213,7 @@ export default function Header() {
               >
                 Iniciar sesión
               </button>
-              <a href="#" className="mobile-drawer__subscribe" onClick={closeMobile}>
+              <a href="/suscripciones" className="mobile-drawer__subscribe" onClick={closeMobile}>
                 <Sparkles className="w-4 h-4 inline mr-1" />
                 Suscribirse
               </a>

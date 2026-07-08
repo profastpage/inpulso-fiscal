@@ -60,11 +60,11 @@ export default function Footer() {
 
   const navLinks = [
     { label: "Inicio", href: "/" },
-    { label: "Nuestros Servicios", href: "#" },
-    { label: "Reportes Técnicos", href: "#" },
-    { label: "Cursos y Formación", href: "#" },
-    { label: "Sobre el Instituto", href: "#" },
-    { label: "Contacto", href: "#" },
+    { label: "Nuestros Servicios", href: "/reportes" },
+    { label: "Reportes Técnicos", href: "/reportes" },
+    { label: "Cursos y Formación", href: "/cursos" },
+    { label: "Sobre el Instituto", href: "/nosotros" },
+    { label: "Contacto", href: "/contacto" },
   ];
 
   const bottomLinks = [

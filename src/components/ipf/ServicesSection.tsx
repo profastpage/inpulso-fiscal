@@ -217,15 +217,15 @@ export default function ServicesSection() {
               Ver todos los cursos <ArrowRight className="w-4 h-4" />
             </a>
           </div>
-          <div className="course-list">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {courses.map((course) => (
               <a
                 key={course}
                 href="#"
-                className="course-list__item group hover:translate-x-2 transition-transform duration-300 course-item"
+                className="flex items-center gap-3 p-4 rounded-xl border border-slate-100 bg-white hover:bg-brand-50 hover:border-brand-100 transition-all duration-300 course-item group"
               >
                 <CheckCircle2 className="w-4 h-4 text-brand-600 flex-shrink-0" />
-                <span className="group-hover:text-brand-700 transition-colors">
+                <span className="text-[13px] font-semibold text-slate-700 group-hover:text-brand-700 transition-colors leading-snug">
                   {course}
                 </span>
               </a>
