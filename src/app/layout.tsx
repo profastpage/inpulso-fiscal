@@ -18,8 +18,14 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
+const SITE_URL = "https://www.inpulsofiscal.com";
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
 export const metadata: Metadata = {
-  title: "Inicio | Instituto Pulso Fiscal",
+  title: {
+    default: "Instituto Pulso Fiscal — Análisis Económico y Política Fiscal en Perú",
+    template: "%s | Instituto Pulso Fiscal",
+  },
   description:
     "Portal líder en análisis económico, política fiscal y gestión pública en Perú. Think Tank especializado en macroeconomía y presupuesto público.",
   keywords: [
@@ -29,16 +35,46 @@ export const metadata: Metadata = {
     "presupuesto público",
     "gestión pública",
     "think tank Perú",
+    "semana fiscal",
+    "reportes técnicos",
+    "cursos economía",
   ],
-  authors: [{ name: "Instituto Pulso Fiscal" }],
+  authors: [{ name: "Instituto Pulso Fiscal", url: SITE_URL }],
+  creator: "Instituto Pulso Fiscal",
+  publisher: "Instituto Pulso Fiscal",
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Instituto Pulso Fiscal",
+    title: "Instituto Pulso Fiscal — Análisis Económico y Política Fiscal en Perú",
     description:
-      "Tu fuente confiable de conocimiento y análisis económico y fiscal",
-    url: "https://www.inpulsofiscal.com",
+      "Tu fuente confiable de análisis económico, política fiscal y gestión pública. Think Tank especializado en macroeconomía y presupuesto público de Perú.",
+    url: SITE_URL,
     siteName: "Instituto Pulso Fiscal",
     type: "website",
     locale: "es_PE",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Instituto Pulso Fiscal — Think Tank de análisis económico y político fiscal en Perú",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Instituto Pulso Fiscal — Análisis Económico y Política Fiscal en Perú",
+    description:
+      "Tu fuente confiable de análisis económico, política fiscal y gestión pública. Think Tank especializado en macroeconomía de Perú.",
+    images: [OG_IMAGE],
+    creator: "@inpulsofiscal",
+  },
+  other: {
+    "image:width": "1200",
+    "image:height": "630",
   },
 };
 
