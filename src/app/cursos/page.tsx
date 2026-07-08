@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CursosPage from "./CursosPage";
+import { JsonLd, breadcrumbSchema, serviceSchema } from "@/components/ipf/JsonLd";
 
 export const metadata: Metadata = {
   title: "Cursos y Formación",
@@ -26,5 +27,25 @@ export const metadata: Metadata = {
 };
 
 export default function Cursos() {
-  return <CursosPage />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Nuestros Servicios", url: "/#servicios" },
+          { name: "Cursos", url: "/cursos" },
+        ])}
+      />
+      <JsonLd
+        data={serviceSchema({
+          name: "Cursos de Formación Especializada",
+          description:
+            "Programas de formación del Instituto Pulso Fiscal en macroeconomía, política fiscal, presupuesto público, sistemas administrativos del Estado y gestión pública para profesionales de Perú.",
+          url: "/cursos",
+          category: "Formación especializada",
+        })}
+      />
+      <CursosPage />
+    </>
+  );
 }

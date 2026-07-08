@@ -4,7 +4,7 @@ import "./globals.css";
 import ReadingProgressBar from "@/components/ipf/ReadingProgressBar";
 import ParticleBackground from "@/components/ipf/ParticleBackground";
 import MobileBottomNav from "@/components/ipf/MobileBottomNav";
-import { JsonLd, organizationSchema } from "@/components/ipf/JsonLd";
+import { JsonLd, organizationSchema, webSiteSchema } from "@/components/ipf/JsonLd";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -89,6 +89,7 @@ export default function RootLayout({
         className={`${inter.variable} ${plusJakarta.variable} antialiased`}
       >
         <JsonLd data={organizationSchema()} />
+        <JsonLd data={webSiteSchema()} />
         <ReadingProgressBar />
         <ParticleBackground />
         {children}

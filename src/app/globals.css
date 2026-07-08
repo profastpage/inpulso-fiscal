@@ -1432,7 +1432,6 @@ html {
   height: 58px;
   border-radius: 9999px;
   background: #25D366;
-  display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 18px 40px rgba(2, 6, 23, 0.18);
@@ -1440,6 +1439,12 @@ html {
   z-index: 120;
   text-decoration: none;
   transition: transform 0.3s ease;
+}
+
+@media (max-width: 1023px) {
+  .whatsapp-fab {
+    display: none !important;
+  }
 }
 
 .whatsapp-fab:hover {
@@ -1586,11 +1591,6 @@ html {
   .site-header__toggle {
     display: flex;
   }
-  .site-header--transparent .site-header__subscribe {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-  }
-  .site-nav,
   .site-header__actions {
     display: none;
   }

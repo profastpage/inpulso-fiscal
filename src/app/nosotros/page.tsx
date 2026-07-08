@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import NosotrosPage from "./NosotrosPage";
+import { JsonLd, breadcrumbSchema } from "@/components/ipf/JsonLd";
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -26,5 +27,15 @@ export const metadata: Metadata = {
 };
 
 export default function Nosotros() {
-  return <NosotrosPage />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Nosotros", url: "/nosotros" },
+        ])}
+      />
+      <NosotrosPage />
+    </>
+  );
 }

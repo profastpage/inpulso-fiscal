@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactoPage from "./ContactoPage";
+import { JsonLd, breadcrumbSchema } from "@/components/ipf/JsonLd";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -26,5 +27,15 @@ export const metadata: Metadata = {
 };
 
 export default function Contacto() {
-  return <ContactoPage />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Contacto", url: "/contacto" },
+        ])}
+      />
+      <ContactoPage />
+    </>
+  );
 }
