@@ -1,72 +1,127 @@
 "use client";
-import { useEffect, useRef, useCallback } from "react";
+
+import { useEffect, useRef, useState, useCallback } from "react";
 
 /**
- * useSectionDeepLink — tracks which section is in view via IntersectionObserver
- * and updates the URL hash accordingly. On mount, scrolls to the hash fragment
- * if one is present in the URL.
+ * useSectionDeepLink — IntersectionObserver-based scroll spy.
+ *
+ * What it does:
+ * 1. Observes every <section> whose `id` is in `sectionIds`.
+ * 2. When a section enters the viewport (rootMargin "-20% 0px -60% 0px"),
+ *    it becomes the "active" section.
+ * 3. The URL hash is updated silently via `history.replaceState`
+ *    (no scroll jump, no pushState noise).
+ * 4. On first mount, if the URL already contains a matching hash,
+ *    it smooth-scrolls to that section.
+ *
+ * Works on mobile (touch scroll) and desktop (mouse wheel / trackpad).
  */
-export function useSectionDeepLink(sectionIds: string[]) {
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const updateHash = useCallback((id: string | null) => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-    }
-    timerRef.current = setTimeout(() => {
-      const url = new URL(window.location.href);
-      if (id) {
-        url.hash = id;
-      } else {
-        url.hash = "";
-      }
-      window.history.replaceState(null, "", url.toString());
-    }, 300);
-  }, []);
+interface UseSectionDeepLinkOptions {
+  /** Section ids to observe (must match `id` attributes on <section> elements) */
+  sectionIds: string[];
+  /** IntersectionObserver rootMargin — controls when a section counts as "in view" */
+  rootMargin?: string;
+}
 
+export function useSectionDeepLink({
+  sectionIds,
+  rootMargin = "-20% 0px -60% 0px",
+}: UseSectionDeepLinkOptions) {
+  const [activeId, setActiveId] = useState<string>("");
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const hasScrolledToHash = useRef(false);
+
+  /* ── Scroll to hash on first mount ───────────────────────────── */
   useEffect(() => {
-    // On mount, scroll to hash if present
+    if (hasScrolledToHash.current) return;
+
     const hash = window.location.hash.replace("#", "");
-    if (hash) {
-      const el = document.getElementById(hash);
-      if (el) {
-        // Small delay to let layout settle
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-      }
+    if (hash && sectionIds.includes(hash)) {
+      hasScrolledToHash.current = true;
+      // Small delay to let the layout settle (images, fonts, etc.)
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          const headerOffset = 80; // header height
+          const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [sectionIds]);
+
+  /* ── IntersectionObserver ────────────────────────────────────── */
+  useEffect(() => {
+    // Disconnect previous observer if any
+    if (observerRef.current) {
+      observerRef.current.disconnect();
     }
 
-    // Set up IntersectionObserver
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            if (id) {
-              updateHash(id);
-            }
-          }
+        // Find entries that are intersecting
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length === 0) return;
+
+        // Pick the one with the highest intersection ratio
+        const topEntry = visible.reduce((best, curr) =>
+          curr.intersectionRatio > best.intersectionRatio ? curr : best
+        );
+
+        const id = topEntry.target.id;
+        if (id && id !== activeId) {
+          setActiveId(id);
+          // Silent URL update — no scroll, no history entry
+          const url = id ? `${window.location.pathname}#${id}` : window.location.pathname;
+          history.replaceState(null, "", url);
         }
       },
       {
-        rootMargin: "-80px 0px -50% 0px",
-        threshold: 0.2,
+        rootMargin,
+        threshold: [0, 0.1, 0.25, 0.5, 0.75],
       }
     );
 
-    for (const id of sectionIds) {
+    observerRef.current = observer;
+
+    // Observe all registered sections
+    const cleanupFns: (() => void)[] = [];
+    sectionIds.forEach((id) => {
       const el = document.getElementById(id);
       if (el) {
         observer.observe(el);
+      } else {
+        // Retry once after a short delay (elements might not be mounted yet)
+        const timer = setTimeout(() => {
+          const el2 = document.getElementById(id);
+          if (el2) observer.observe(el2);
+        }, 500);
+        cleanupFns.push(() => clearTimeout(timer));
       }
-    }
+    });
 
     return () => {
       observer.disconnect();
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
+      cleanupFns.forEach((fn) => fn());
     };
-  }, [sectionIds, updateHash]);
+  }, [sectionIds, rootMargin, activeId]);
+
+  /* ── Programmatic scroll helper ──────────────────────────────── */
+  const scrollToSection = useCallback(
+    (id: string) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const headerOffset = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top, behavior: "smooth" });
+      setActiveId(id);
+      const url = `${window.location.pathname}#${id}`;
+      history.replaceState(null, "", url);
+    },
+    []
+  );
+
+  return { activeId, scrollToSection };
 }

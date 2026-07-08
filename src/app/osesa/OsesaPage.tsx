@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,8 +17,19 @@ import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
 import PageHero from "@/components/ipf/PageHero";
+import Section from "@/components/ipf/Section";
+import SectionNav from "@/components/ipf/SectionNav";
+import { useSectionDeepLink } from "@/hooks/useSectionDeepLink";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const SECTIONS = [
+  { id: "estadisticas", label: "Estadísticas" },
+  { id: "que-es-osesa", label: "¿Qué es el OSESA?" },
+  { id: "abordaje", label: "Nuestro Abordaje" },
+  { id: "cta-osesa", label: "Acceder" },
+];
+const sectionIds = SECTIONS.map((s) => s.id);
 
 const features = [
   {
@@ -67,7 +77,7 @@ const contentBlocks = [
 ];
 
 export default function OsesaPage() {
-  const revealRef = useRef<HTMLDivElement>(null);
+  const { activeId, scrollToSection } = useSectionDeepLink({ sectionIds });
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -84,7 +94,7 @@ export default function OsesaPage() {
         />
 
         {/* Stats Bar */}
-        <section className="relative z-10 -mt-1 bg-white">
+        <Section id="estadisticas" className="relative z-10 -mt-1 bg-white">
           <div className="max-w-5xl mx-auto px-6 py-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {stats.map((s) => (
@@ -99,10 +109,10 @@ export default function OsesaPage() {
               ))}
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Content Blocks */}
-        <section className="bg-slate-50/60 py-20 px-6" ref={revealRef}>
+        <Section id="que-es-osesa" className="bg-slate-50/60 py-20 px-6">
           <div className="max-w-3xl mx-auto space-y-16">
             {contentBlocks.map((block, i) => (
               <div key={block.title}>
@@ -115,10 +125,10 @@ export default function OsesaPage() {
               </div>
             ))}
           </div>
-        </section>
+        </Section>
 
         {/* Features Grid */}
-        <section className="bg-white py-20 px-6">
+        <Section id="abordaje" className="bg-white py-20 px-6">
           <div className="max-w-5xl mx-auto">
             <h2 className="font-display text-2xl md:text-3xl font-900 text-slate-900 tracking-tight text-center mb-12">
               Nuestro abordaje
@@ -140,10 +150,10 @@ export default function OsesaPage() {
               ))}
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* CTA */}
-        <section className="bg-navy-950 py-20 px-6">
+        <Section id="cta-osesa" className="bg-navy-950 py-20 px-6">
           <div className="max-w-2xl mx-auto text-center">
             <ShieldCheck className="w-12 h-12 text-brand-400 mx-auto mb-6" />
             <h2 className="font-display text-2xl md:text-3xl font-900 text-white tracking-tight mb-4">
@@ -161,10 +171,11 @@ export default function OsesaPage() {
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
-        </section>
+        </Section>
       </main>
       <Footer />
       <WhatsAppButton />
+      <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
     </div>
   );
 }

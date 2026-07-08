@@ -7,6 +7,16 @@ import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
 import PageHero from "@/components/ipf/PageHero";
+import Section from "@/components/ipf/Section";
+import SectionNav from "@/components/ipf/SectionNav";
+import { useSectionDeepLink } from "@/hooks/useSectionDeepLink";
+
+const SECTIONS = [
+  { id: "historia", label: "Historia" },
+  { id: "mision-vision", label: "Misión y Visión" },
+  { id: "equipo", label: "Equipo" },
+];
+const sectionIds = SECTIONS.map((s) => s.id);
 
 const metrics = [
   { value: "15+", label: "Años de experiencia" },
@@ -29,6 +39,8 @@ const team = [
 ];
 
 export default function NosotrosPage() {
+  const { activeId, scrollToSection } = useSectionDeepLink({ sectionIds });
+
   const historyRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
@@ -46,22 +58,20 @@ export default function NosotrosPage() {
           badge="Institución"
           title={<>Referente Independiente en <span>Investigación Económica</span></>}
           subtitle="Centro de investigación dedicado al estudio de la macroeconomía, las finanzas públicas y la gestión pública."
-          gradient="linear-gradient(135deg, #020617 0%, #072848 50%, #064b81 100%)"
-          pattern="radial-gradient(circle at 70% 30%, rgba(14,140,225,0.2) 0%, transparent 60%)"
         >
           {/* Metrics row */}
           <div className="flex flex-wrap gap-x-10 gap-y-6 mt-10">
             {metrics.map((m) => (
               <div key={m.label} className="flex flex-col">
-                <span className="text-2xl sm:text-3xl font-bold text-white">{m.value}</span>
-                <span className="text-[11px] font-semibold text-white/50 uppercase tracking-[0.5px] mt-1">{m.label}</span>
+                <span className="text-2xl sm:text-3xl font-bold text-navy-950">{m.value}</span>
+                <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.5px] mt-1">{m.label}</span>
               </div>
             ))}
           </div>
         </PageHero>
 
         {/* Historia */}
-        <section className="bg-white py-24">
+        <Section id="historia" className="bg-white py-24">
           <div className="max-w-[1200px] mx-auto px-6">
             <div ref={historyRef} className="grid lg:grid-cols-2 gap-16 items-start">
               <motion.div
@@ -103,10 +113,10 @@ export default function NosotrosPage() {
               </motion.div>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Misión y Visión */}
-        <section className="bg-[#f8fafc] py-24">
+        <Section id="mision-vision" className="bg-[#f8fafc] py-24">
           <div className="max-w-[1200px] mx-auto px-6">
             <div ref={missionRef} className="grid lg:grid-cols-2 gap-10">
               <motion.article
@@ -140,10 +150,10 @@ export default function NosotrosPage() {
               </motion.article>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Equipo */}
-        <section className="bg-white py-24">
+        <Section id="equipo" className="bg-white py-24">
           <div className="max-w-[1200px] mx-auto px-6">
             <div className="text-center mb-16">
               <span className="home-kicker">Nuestro Equipo</span>
@@ -173,7 +183,9 @@ export default function NosotrosPage() {
               ))}
             </div>
           </div>
-        </section>
+        </Section>
+
+        <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
       </main>
 
       <Footer />

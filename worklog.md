@@ -55,3 +55,83 @@ Updated Cursos and Contacto pages to use the new full-bleed PageHero component w
 
 ## Notes
 - Lint passes with 0 errors (only pre-existing warnings)
+
+---
+Task ID: 4
+Agent: general-purpose
+Task: Refactor NosotrosPage with Section component, SectionNav, and useSectionDeepLink
+
+Work Log:
+- Read existing NosotrosPage.tsx
+- Added Section, SectionNav, useSectionDeepLink imports
+- Replaced raw sections with Section component wrappers
+- Added scroll-spy navigation with SectionNav
+- Updated PageHero to use light default
+- Updated hero children colors for light background
+
+Stage Summary:
+- NosotrosPage now has 3 deep-linkable sections: historia, mision-vision, equipo
+- SectionNav floating indicator added for desktop and mobile
+- URL hash updates on scroll via useSectionDeepLink
+
+---
+Task ID: 5
+Agent: general-purpose
+Task: Refactor OsesaPage with Section component, SectionNav, and useSectionDeepLink
+
+Work Log:
+- Read existing OsesaPage.tsx
+- Added Section, SectionNav, useSectionDeepLink imports
+- Replaced raw sections with Section component wrappers
+- Added scroll-spy navigation with SectionNav
+- Updated PageHero to use light default
+
+Stage Summary:
+- OsesaPage now has 4 deep-linkable sections: estadisticas, que-es-osesa, abordaje, cta-osesa
+- SectionNav floating indicator added for desktop and mobile
+- URL hash updates on scroll via useSectionDeepLink
+
+---
+Task ID: 6c
+Agent: general-purpose
+Task: Refactor SuscripcionesPage with Section component and useSectionDeepLink
+
+Work Log:
+- Added Section, SectionNav, useSectionDeepLink imports
+- Added SECTIONS config and hook
+- Wrapped plan grid in Section component
+- Added SectionNav floating indicator
+
+Stage Summary:
+- SuscripcionesPage has 1 deep-linkable section: planes
+
+---
+Task ID: 6b
+Agent: general-purpose
+Task: Refactor ContactoPage with Section component and useSectionDeepLink
+
+Work Log:
+- Added Section, SectionNav, useSectionDeepLink imports
+- Added SECTIONS config and hook
+- Wrapped form and sidebar in Section components
+- Added SectionNav floating indicator
+- Removed dark gradient from PageHero
+
+Stage Summary:
+- ContactoPage has 2 deep-linkable sections: formulario, datos-contacto
+
+---
+Task ID: 6a
+Agent: general-purpose
+Task: Refactor CursosPage with Section component and useSectionDeepLink
+
+Work Log:
+- Added Section, SectionNav, useSectionDeepLink imports
+- Added SECTIONS config and hook
+- Wrapped course grid in Section component
+- Added SectionNav floating indicator
+- Removed dark gradient from PageHero
+
+Stage Summary:
+- CursosPage has 1 deep-linkable section: programas
+- SectionNav added for scroll-spy navigation

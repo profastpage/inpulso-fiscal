@@ -7,6 +7,9 @@ import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
 import PageHero from "@/components/ipf/PageHero";
+import Section from "@/components/ipf/Section";
+import SectionNav from "@/components/ipf/SectionNav";
+import { useSectionDeepLink } from "@/hooks/useSectionDeepLink";
 
 /* ─── Inline SVG Icons ─────────────────────────────────────────────── */
 
@@ -88,6 +91,12 @@ const INITIAL_FORM: FormData = {
   mensaje: "",
 };
 
+const SECTIONS = [
+  { id: "formulario", label: "Formulario" },
+  { id: "datos-contacto", label: "Contacto" },
+];
+const sectionIds = SECTIONS.map((s) => s.id);
+
 /* ─── Component ─────────────────────────────────────────────────────── */
 
 export default function ContactoPage() {
@@ -97,6 +106,8 @@ export default function ContactoPage() {
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
+
+  const { activeId, scrollToSection } = useSectionDeepLink({ sectionIds });
 
   /* ── GSAP Entrance Animations ─────────────────────────────────── */
 
@@ -151,8 +162,6 @@ export default function ContactoPage() {
           badge="Contáctenos"
           title={<>Estamos aquí para <span>ayudarle</span></>}
           subtitle="¿Tiene alguna consulta sobre nuestros servicios, publicaciones o cursos? Complete el formulario o contáctenos directamente."
-          gradient="linear-gradient(135deg, #0f172a 0%, #072848 50%, #03589c 100%)"
-          pattern="radial-gradient(circle at 50% 50%, rgba(14,140,225,0.15) 0%, transparent 60%)"
         />
 
         <div className="container mx-auto px-6">
@@ -160,7 +169,7 @@ export default function ContactoPage() {
           {/* ── Two-column Layout ────────────────────────────────── */}
           <div className="grid lg:grid-cols-5 gap-10">
             {/* ── Left Column: Contact Form ──────────────────────── */}
-            <div ref={formRef} className="lg:col-span-3">
+            <Section id="formulario" className="lg:col-span-3" ref={formRef}>
               <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8 sm:p-10">
                 <h2 className="text-xl font-extrabold text-navy-950 mb-8">
                   Envíenos un mensaje
@@ -327,10 +336,10 @@ export default function ContactoPage() {
                   </form>
                 )}
               </div>
-            </div>
+            </Section>
 
             {/* ── Right Column: Sidebar ─────────────────────────── */}
-            <div ref={sidebarRef} className="lg:col-span-2 space-y-6">
+            <Section id="datos-contacto" className="lg:col-span-2 space-y-6" ref={sidebarRef}>
               {/* ── Contact Data Card ──────────────────────────── */}
               <div className="bg-white rounded-[28px] border border-slate-100 shadow-sm p-8">
                 <h3 className="text-sm font-extrabold text-navy-950 uppercase tracking-wider mb-6">
@@ -454,9 +463,10 @@ export default function ContactoPage() {
                   Chatear por WhatsApp
                 </a>
               </div>
-            </div>
+            </Section>
           </div>
         </div>
+        <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
       </main>
 
       <Footer />

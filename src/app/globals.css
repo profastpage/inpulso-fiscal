@@ -1421,6 +1421,71 @@ html {
   }
 }
 
+/* ── Light Hero Variant ───────────────────────────────────────── */
+.page-hero--light .page-hero__grid {
+  background-image:
+    linear-gradient(rgba(3,88,156,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(3,88,156,.06) 1px, transparent 1px);
+}
+
+.page-hero__badge--light {
+  color: #03589c;
+  background: rgba(3, 88, 156, 0.08);
+  border-color: rgba(3, 88, 156, 0.15);
+}
+
+.page-hero__title--light {
+  color: #020617;
+}
+
+.page-hero__title--light span {
+  background: linear-gradient(135deg, #03589c, #0e8ce1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-hero__subtitle--light {
+  color: #475569;
+}
+
+.page-hero__fade--light {
+  background: linear-gradient(to top, #f8fafc, transparent);
+}
+
+.page-hero-children--light {
+  color: #020617;
+}
+
+/* ========================= */
+/* TRANSPARENT HEADER - DARK */
+/* ========================= */
+.site-header--transparent .site-brand__copy strong {
+  color: #020617;
+}
+
+.site-header--transparent .site-brand__copy small {
+  color: #475569;
+}
+
+.site-header--transparent .nav-link {
+  color: #334155;
+}
+
+.site-header--transparent .nav-link:hover,
+.site-header--transparent .nav-link--active {
+  color: #020617;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.site-header--transparent .site-header__toggle {
+  color: #020617;
+}
+
+.site-header--transparent .site-header__toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
 /* ========================= */
 /* WHATSAPP BUTTON           */
 /* ========================= */

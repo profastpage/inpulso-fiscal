@@ -16,6 +16,9 @@ import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
 import PageHero from "@/components/ipf/PageHero";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
+import Section from "@/components/ipf/Section";
+import SectionNav from "@/components/ipf/SectionNav";
+import { useSectionDeepLink } from "@/hooks/useSectionDeepLink";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -188,6 +191,11 @@ const COURSES: Course[] = [
     ],
   },
 ];
+
+const SECTIONS = [
+  { id: "programas", label: "Programas" },
+];
+const sectionIds = SECTIONS.map((s) => s.id);
 
 /* Gradient variants for placeholder covers */
 const COVER_GRADIENTS = [
@@ -551,6 +559,8 @@ export default function CursosPage() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
+  const { activeId, scrollToSection } = useSectionDeepLink({ sectionIds });
+
   const filteredCourses = getFilteredCourses(COURSES, activeFilter);
 
   /* GSAP ScrollTrigger for card entrance on initial page load */
@@ -592,11 +602,9 @@ export default function CursosPage() {
           badge="Excelencia Académica"
           title={<>Programas de <span>Alta Especialización</span> en Gestión Pública</>}
           subtitle="Capacitación técnica de nivel avanzado para profesionales que lideran el sector público peruano."
-          gradient="linear-gradient(135deg, #0f172a 0%, #072848 40%, #03589c 100%)"
-          pattern="radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 50%)"
         />
 
-        <div className="container mx-auto px-6">
+        <Section id="programas" className="container mx-auto px-6" ariaLabel="Programas de formación">
 
           {/* Filtering System */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8 mb-10 sm:mb-16">
@@ -660,7 +668,7 @@ export default function CursosPage() {
               )}
             </AnimatePresence>
           </div>
-        </div>
+        </Section>
       </main>
 
       {/* Syllabus Modal */}
@@ -673,6 +681,7 @@ export default function CursosPage() {
         )}
       </AnimatePresence>
 
+      <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
       <Footer />
       <WhatsAppButton />
     </div>

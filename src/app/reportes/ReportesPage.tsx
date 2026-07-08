@@ -6,6 +6,9 @@ import Header from "@/components/ipf/Header";
 import PageHero from "@/components/ipf/PageHero";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
+import Section from "@/components/ipf/Section";
+import SectionNav from "@/components/ipf/SectionNav";
+import { useSectionDeepLink } from "@/hooks/useSectionDeepLink";
 
 /* ================================ */
 /* TYPES                              */
@@ -539,6 +542,12 @@ export default function ReportesPage() {
   const [filterYear, setFilterYear] = useState("Todos");
   const gridRef = useRef<HTMLDivElement>(null);
 
+  const SECTIONS = [
+    { id: "publicaciones", label: "Publicaciones" },
+  ];
+  const sectionIds = SECTIONS.map((s) => s.id);
+  const { activeId, scrollToSection } = useSectionDeepLink({ sectionIds });
+
   const isFiltered =
     filterPublicationType !== "Todos" ||
     filterCategory !== "Todas" ||
@@ -604,10 +613,8 @@ export default function ReportesPage() {
           badge="Semana Fiscal"
           title={<>Publicaciones y <span>Análisis Técnico</span></>}
           subtitle="Accede a reportes especializados sobre macroeconomía, política fiscal, presupuesto público y gestión pública en el Perú."
-          gradient="linear-gradient(135deg, #020617 0%, #0b3f6b 50%, #064b81 100%)"
-          pattern="radial-gradient(circle at 30% 60%, rgba(124,200,251,0.15) 0%, transparent 60%)"
         />
-        <div className="container mx-auto px-6">
+        <Section id="publicaciones" className="container mx-auto px-6" ariaLabel="Publicaciones y análisis técnico">
 
           {/* 3. ADVANCED FILTER BAR */}
           <div className="py-3 mb-8 z-[60]">
@@ -828,9 +835,10 @@ export default function ReportesPage() {
               )}
             </div>
           )}
-        </div>
+        </Section>
       </main>
 
+      <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
       <Footer />
       <WhatsAppButton />
     </div>

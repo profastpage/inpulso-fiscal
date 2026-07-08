@@ -20,6 +20,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
+import Section from "@/components/ipf/Section";
+import SectionNav from "@/components/ipf/SectionNav";
+import { useSectionDeepLink } from "@/hooks/useSectionDeepLink";
 
 /* ======================== */
 /* PLAN DATA                 */
@@ -109,6 +112,11 @@ const plans = [
   },
 ];
 
+const SECTIONS = [
+  { id: "planes", label: "Planes" },
+];
+const sectionIds = SECTIONS.map((s) => s.id);
+
 /* ======================== */
 /* ICON HELPER               */
 /* ======================== */
@@ -137,6 +145,8 @@ export default function SuscripcionesPage() {
     fecha_vencimiento: "",
   });
 
+  const { activeId, scrollToSection } = useSectionDeepLink({ sectionIds });
+
   const handleSubscribe = (plan: (typeof plans)[number]) => {
     setSelectedPlan(plan);
     setPaymentStep(1);
@@ -164,7 +174,7 @@ export default function SuscripcionesPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
-      <Header transparent />
+      <Header />
 
       <main className="pricing-premium pricing-premium--page flex-1">
         <div className="pricing-premium__bg pricing-premium__bg--radials" />
@@ -192,7 +202,8 @@ export default function SuscripcionesPage() {
           </header>
 
           {/* Plan Grid */}
-          <div className="plan-grid-v4 mb-16">
+          <Section id="planes" className="mb-16" ariaLabel="Planes de suscripción">
+          <div className="plan-grid-v4">
             {plans.map((p, i) => {
               const IconComp = p.icon;
               return (
@@ -277,6 +288,7 @@ export default function SuscripcionesPage() {
               );
             })}
           </div>
+          </Section>
 
           {/* Planes Corporativos */}
           <div className="mt-12 text-center">
@@ -300,6 +312,7 @@ export default function SuscripcionesPage() {
         </div>
       </main>
 
+      <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
       <Footer />
       <WhatsAppButton />
 
