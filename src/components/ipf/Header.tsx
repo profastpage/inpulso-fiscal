@@ -70,9 +70,8 @@ export default function Header() {
         <div className="site-header__inner">
           {/* Brand */}
           <a href="/" className="site-brand" aria-label="Instituto Pulso Fiscal - Inicio">
-            <div className="site-brand__logo bg-gradient-to-br from-brand-600 to-brand-800 flex items-center justify-center rounded-[10px] text-white font-display font-black text-lg">
-              IPF
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Logo IPF" className="site-brand__logo" />
             <span className="site-brand__copy">
               <strong>INSTITUTO PULSO FISCAL</strong>
               <small>Especialistas en macroeconomía y gestión pública</small>
@@ -267,9 +266,8 @@ function AuthModal({ onClose }: { onClose: () => void }) {
             <X className="w-5 h-5" />
           </button>
           <div className="auth-modal__brand">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-brand-700 flex items-center justify-center text-white font-display font-black text-lg mx-auto">
-              IPF
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Logo IPF" className="w-12 h-12 rounded-xl mx-auto object-cover" />
           </div>
           <span className="auth-modal__eyebrow">Instituto Pulso Fiscal</span>
           <h3 className="auth-modal__title">
