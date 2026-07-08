@@ -4,6 +4,14 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Info,
+  X,
+  Check,
+  Download,
+  Lock,
+  GraduationCap,
+} from "lucide-react";
 import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
@@ -62,7 +70,7 @@ const COURSES: Course[] = [
     priceOriginal: "S/ 220.00",
     priceCurrent: "S/ 220.00",
     status: "Activo",
-    cover: "/placeholder-course.jpg",
+    cover: "assets/img/cursos/macroeconomia.jpg",
     description:
       "Comprende los indicadores económicos clave que impactan en las decisiones de política fiscal y empresarial. PBI, inflación, tipo de cambio, balanza comercial y política monetaria explicados de forma práctica y aplicada al contexto peruano.",
     syllabusUrl: "",
@@ -89,7 +97,7 @@ const COURSES: Course[] = [
     priceOriginal: "S/ 550.00",
     priceCurrent: "S/ 550.00",
     status: "Proximamente",
-    cover: "/placeholder-course.jpg",
+    cover: "assets/img/imgsld1.jpg",
     description: "Canon, regalías, FONCOMUN y gestión.",
     syllabusUrl: "",
     syllabusTitle: "Finanzas Municipales y Transferencias",
@@ -114,7 +122,7 @@ const COURSES: Course[] = [
     priceOriginal: "S/ 750.00",
     priceCurrent: "S/ 750.00",
     status: "Proximamente",
-    cover: "/placeholder-course.jpg",
+    cover: "assets/img/imgsld1.jpg",
     description: "Herramientas cuantitativas para indicadores.",
     syllabusUrl: "",
     syllabusTitle: "Análisis Macroeconómico Sector Público",
@@ -139,7 +147,7 @@ const COURSES: Course[] = [
     priceOriginal: "S/ 650.00",
     priceCurrent: "S/ 650.00",
     status: "Proximamente",
-    cover: "/placeholder-course.jpg",
+    cover: "assets/img/imgsld1.jpg",
     description: "Comprende el ciclo presupuestario peruano.",
     syllabusUrl: "",
     syllabusTitle: "Presupuesto Público y Gestión por Resultados",
@@ -164,7 +172,7 @@ const COURSES: Course[] = [
     priceOriginal: "S/ 890.00",
     priceCurrent: "S/ 890.00",
     status: "Activo",
-    cover: "/placeholder-course.jpg",
+    cover: "assets/img/imgsld1.jpg",
     description: "Domina el Impuesto a la Renta de tercera categoría.",
     syllabusUrl: "",
     syllabusTitle: "Tributación Empresarial Avanzada",
@@ -182,149 +190,12 @@ const COURSES: Course[] = [
 
 /* Gradient variants for placeholder covers */
 const COVER_GRADIENTS = [
-  "from-brand-800 to-navy-950",
-  "from-brand-700 to-brand-950",
+  "from-brand-700 to-navy-950",
+  "from-brand-800 to-navy-900",
   "from-navy-800 to-brand-900",
   "from-brand-600 to-navy-950",
-  "from-brand-900 to-navy-900",
+  "from-brand-900 to-navy-800",
 ] as const;
-
-/* ================================================================ */
-/* INLINE SVG ICONS                                                 */
-/* ================================================================ */
-
-function IconInfo({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={18}
-      height={18}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 16v-4" />
-      <path d="M12 8h.01" />
-    </svg>
-  );
-}
-
-function IconX({ className = "w-5 h-5" }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={20}
-      height={20}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
-    </svg>
-  );
-}
-
-function IconCheck({
-  className = "w-3.5 h-3.5",
-}: {
-  className?: string;
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={14}
-      height={14}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
-  );
-}
-
-function IconDownload({
-  className = "w-3.5 h-3.5",
-}: {
-  className?: string;
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={14}
-      height={14}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" x2="12" y1="15" y2="3" />
-    </svg>
-  );
-}
-
-function IconLock({ className = "w-3.5 h-3.5" }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={14}
-      height={14}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-    </svg>
-  );
-}
-
-function IconCreditCard({
-  className = "w-4 h-4",
-}: {
-  className?: string;
-}) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={16}
-      height={16}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <rect width="22" height="16" x="1" y="4" rx="2" />
-      <line x1="1" x2="23" y1="10" y2="10" />
-    </svg>
-  );
-}
 
 /* ================================================================ */
 /* HELPERS                                                          */
@@ -334,8 +205,7 @@ function getBadgeClass(status: string): string {
   const s = status.toLowerCase();
   if (s.includes("abiert")) return "badge-abierto";
   if (s.includes("dispon")) return "badge-disponible";
-  if (s.includes("próxim") || s.includes("proxim"))
-    return "badge-proximo";
+  if (s.includes("próxim") || s.includes("proxim")) return "badge-proximo";
   if (s.includes("lanz")) return "badge-lanzamiento";
   if (s.includes("grab")) return "badge-grabado";
   return "badge-proximo";
@@ -351,6 +221,12 @@ function getFilteredCourses(
       c.category.toLowerCase().includes(filter.toLowerCase()) ||
       c.title.toLowerCase().includes(filter.toLowerCase())
   );
+}
+
+function getFilterLabel(filter: string): string {
+  if (filter === "Todos") return "Todos los Programas";
+  if (filter === "Planeamiento Estratégico") return "Planeamiento";
+  return filter;
 }
 
 /* ================================================================ */
@@ -404,8 +280,9 @@ function SyllabusModal({
               onClick={onClose}
               className="w-11 h-11 rounded-2xl bg-slate-50 text-slate-500 hover:text-navy-950 flex items-center justify-center transition-colors"
               aria-label="Cerrar"
+              type="button"
             >
-              <IconX />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
@@ -462,7 +339,7 @@ function SyllabusModal({
                   {course.includes.map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <span className="mt-1 w-5 h-5 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center flex-shrink-0">
-                        <IconCheck />
+                        <Check className="w-3.5 h-3.5" />
                       </span>
                       <span>{item}</span>
                     </li>
@@ -478,8 +355,10 @@ function SyllabusModal({
                 <div
                   className={`w-full h-[220px] bg-gradient-to-br ${
                     COVER_GRADIENTS[course.id % COVER_GRADIENTS.length]
-                  }`}
-                />
+                  } flex items-center justify-center`}
+                >
+                  <GraduationCap className="w-12 h-12 text-white/20" />
+                </div>
 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -510,7 +389,7 @@ function SyllabusModal({
                       className="mt-6 w-full inline-flex items-center justify-center gap-2 bg-gradient-to-b from-brand-600 to-brand-700 text-white font-extrabold py-3 rounded-2xl shadow-lg shadow-brand-700/15 transition-opacity hover:opacity-90"
                     >
                       Descargar Syllabus
-                      <IconDownload className="w-4 h-4" />
+                      <Download className="w-4 h-4" />
                     </a>
                   ) : (
                     <button
@@ -519,51 +398,9 @@ function SyllabusModal({
                       type="button"
                     >
                       Syllabus no disponible
-                      <IconLock className="w-4 h-4" />
+                      <Lock className="w-4 h-4" />
                     </button>
                   )}
-
-                  {/* Payment Form Structure (simplified) */}
-                  <div className="mt-6 pt-6 border-t border-slate-100">
-                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">
-                      Datos de facturación
-                    </div>
-                    <div className="space-y-2">
-                      <input
-                        type="email"
-                        placeholder="Correo electrónico"
-                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950"
-                        readOnly
-                      />
-                      <div className="grid grid-cols-2 gap-2">
-                        <input
-                          type="text"
-                          placeholder="Nombres"
-                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950"
-                          readOnly
-                        />
-                        <input
-                          type="text"
-                          placeholder="Apellidos"
-                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950"
-                          readOnly
-                        />
-                      </div>
-                      <input
-                        type="tel"
-                        placeholder="N° de celular"
-                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950"
-                        readOnly
-                      />
-                      <button
-                        type="button"
-                        className="w-full inline-flex items-center justify-center gap-2 bg-navy-950 text-white font-extrabold py-3 rounded-2xl transition-opacity hover:opacity-90"
-                      >
-                        <IconCreditCard />
-                        Pagar ahora
-                      </button>
-                    </div>
-                  </div>
                 </div>
               </div>
             </aside>
@@ -580,7 +417,6 @@ function SyllabusModal({
 
 function CourseCard({
   course,
-  index,
 }: {
   course: Course;
   index: number;
@@ -591,14 +427,17 @@ function CourseCard({
   return (
     <a
       href={`/curso?id=${course.id}`}
-      className="course-card-premium group block"
+      className="course-card-premium group block h-full flex flex-col"
       style={{ textDecoration: "none", color: "inherit" }}
     >
       {/* Media */}
-      <div className="course-card-premium__media cursor-pointer">
+      <div className="course-card-premium__media aspect-[16/10] rounded-t-[28px] cursor-pointer">
+        {/* Placeholder gradient cover with centered icon */}
         <div
-          className={`w-full h-full bg-gradient-to-br ${gradientClass}`}
-        />
+          className={`w-full h-full bg-gradient-to-br ${gradientClass} flex items-center justify-center`}
+        >
+          <GraduationCap className="w-10 h-10 text-white/20" />
+        </div>
 
         {/* Status Badge */}
         <div className="course-card-premium__status">
@@ -615,7 +454,7 @@ function CourseCard({
         </div>
 
         {/* Hover Overlay */}
-        <div className="course-card-premium__overlay">
+        <div className="course-card-premium__overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <div className="course-card-premium__kicker">
             {course.category}
           </div>
@@ -626,7 +465,7 @@ function CourseCard({
       </div>
 
       {/* Body */}
-      <div className="course-card-premium__body">
+      <div className="course-card-premium__body flex-1 flex flex-col">
         <p className="course-card-premium__desc">{course.description}</p>
 
         <div className="course-card-premium__meta">
@@ -656,7 +495,7 @@ function CourseCard({
           </div>
         </div>
 
-        <div className="course-card-premium__footer">
+        <div className="course-card-premium__footer mt-auto">
           <div>
             <span className="course-card-premium__price-label">
               Inversión
@@ -682,7 +521,7 @@ function CourseCard({
                 onClick={(e) => e.stopPropagation()}
               >
                 Syllabus
-                <IconDownload />
+                <Download className="w-3.5 h-3.5" />
               </a>
             ) : (
               <button
@@ -692,7 +531,7 @@ function CourseCard({
                 onClick={(e) => e.stopPropagation()}
               >
                 Syllabus
-                <IconLock />
+                <Lock className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
@@ -708,14 +547,12 @@ function CourseCard({
 
 export default function CursosPage() {
   const [activeFilter, setActiveFilter] = useState<FilterValue>("Todos");
-  const [selectedCourse, setSelectedCourse] = useState<Course | null>(
-    null
-  );
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   const filteredCourses = getFilteredCourses(COURSES, activeFilter);
 
-  /* GSAP ScrollTrigger for cards */
+  /* GSAP ScrollTrigger for card entrance on initial page load */
   useEffect(() => {
     if (!gridRef.current) return;
 
@@ -739,7 +576,7 @@ export default function CursosPage() {
     }, gridRef);
 
     return () => ctx.revert();
-  }, [activeFilter]);
+  }, []);
 
   const closeSyllabus = useCallback(() => {
     setSelectedCourse(null);
@@ -774,7 +611,7 @@ export default function CursosPage() {
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8 mb-10 sm:mb-16">
             <div className="flex flex-wrap gap-3">
               {FILTERS.map((filter) => (
-                <button
+                <motion.button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
                   className={`filter-pill ${
@@ -783,19 +620,18 @@ export default function CursosPage() {
                       : "filter-pill-inactive"
                   }`}
                   type="button"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ duration: 0.15 }}
                 >
-                  {filter === "Planeamiento Estratégico"
-                    ? "Planeamiento"
-                    : filter === "Todos"
-                      ? "Todos los Programas"
-                      : filter}
-                </button>
+                  {getFilterLabel(filter)}
+                </motion.button>
               ))}
             </div>
 
             <div className="flex items-center gap-4 text-sm font-bold text-slate-400">
               <span className="flex items-center gap-2">
-                <IconInfo />
+                <Info className="w-4 h-4" />
                 Certificación Institucional Incluida
               </span>
             </div>
@@ -803,21 +639,35 @@ export default function CursosPage() {
 
           {/* Courses Grid */}
           <div id="cursos-grid" className="courses-grid" ref={gridRef}>
-            {filteredCourses.length > 0 ? (
-              filteredCourses.map((course, i) => (
-                <CourseCard
-                  key={course.id}
-                  course={course}
-                  index={i}
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-20">
-                <p className="text-slate-400 text-lg">
-                  No se encontraron programas para esta categoría.
-                </p>
-              </div>
-            )}
+            <AnimatePresence mode="popLayout" initial={false}>
+              {filteredCourses.length > 0 ? (
+                filteredCourses.map((course, i) => (
+                  <motion.div
+                    key={course.id}
+                    layout
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.25, delay: i * 0.04 }}
+                    className="h-full"
+                  >
+                    <CourseCard course={course} index={i} />
+                  </motion.div>
+                ))
+              ) : (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="col-span-full text-center py-20"
+                >
+                  <p className="text-slate-400 text-lg">
+                    No se encontraron programas para esta categoría.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </main>

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import ReadingProgressBar from "@/components/ipf/ReadingProgressBar";
+import ParticleBackground from "@/components/ipf/ParticleBackground";
+import MobileBottomNav from "@/components/ipf/MobileBottomNav";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -48,7 +51,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${plusJakarta.variable} antialiased`}
       >
+        <ReadingProgressBar />
+        <ParticleBackground />
         {children}
+        <MobileBottomNav />
       </body>
     </html>
   );
