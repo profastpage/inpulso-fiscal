@@ -8,8 +8,8 @@ export default function WhatsAppButton() {
       href="https://wa.me/51943279673"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="WhatsApp"
-      className="whatsapp-fab hidden md:flex"
+      aria-label="Contactar por WhatsApp"
+      className="whatsapp-fab hidden lg:flex"
     >
       <MessageCircle className="w-7 h-7" fill="white" />
     </a>

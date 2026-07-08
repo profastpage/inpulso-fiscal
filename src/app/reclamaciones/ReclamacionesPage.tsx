@@ -17,7 +17,7 @@ export default function ReclamacionesPage() {
     <div className="min-h-screen flex flex-col bg-slate-50">
       {/* Nav */}
       <nav className="bg-navy-950 border-b border-white/5">
-        <div className="max-w-[1200px] mx-auto px-6 py-4 flex items-center gap-3">
+        <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.png" alt="Logo IPF" className="w-9 h-9 rounded-[8px] object-cover" />
           <a href="/" className="text-white/70 hover:text-white text-sm font-semibold transition-colors">

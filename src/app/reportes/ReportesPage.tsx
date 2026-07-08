@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/ipf/Header";
+import PageHero from "@/components/ipf/PageHero";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
 
@@ -596,27 +597,17 @@ export default function ReportesPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header transparent />
 
-      <main className="flex-1 pt-24 sm:pt-32 pb-20 sm:pb-24">
+      <main className="flex-1 pb-20 sm:pb-24">
+        <PageHero
+          badge="Semana Fiscal"
+          title={<>Publicaciones y <span>Análisis Técnico</span></>}
+          subtitle="Accede a reportes especializados sobre macroeconomía, política fiscal, presupuesto público y gestión pública en el Perú."
+          gradient="linear-gradient(135deg, #020617 0%, #0b3f6b 50%, #064b81 100%)"
+          pattern="radial-gradient(circle at 30% 60%, rgba(124,200,251,0.15) 0%, transparent 60%)"
+        />
         <div className="container mx-auto px-6">
-          {/* 7. PAGE HEADER */}
-          <div className="max-w-4xl mb-10">
-            <span className="text-xs font-bold uppercase tracking-[0.4em] text-brand-600 mb-4 block">
-              BIBLIOTECA PÚBLICA
-            </span>
-            <h1 className="text-4xl lg:text-6xl font-display font-extrabold text-navy-950 mb-8 leading-tight">
-              Biblioteca de{" "}
-              <span className="text-brand-700">
-                Inteligencia y Análisis
-              </span>{" "}
-              Económico
-            </h1>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl">
-              Accede a nuestra biblioteca completa de publicaciones técnicas
-              sobre la realidad económica y fiscal del Perú.
-            </p>
-          </div>
 
           {/* 3. ADVANCED FILTER BAR */}
           <div className="py-3 mb-8 z-[60]">

@@ -164,7 +164,7 @@ export default function SuscripcionesPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
-      <Header />
+      <Header transparent />
 
       <main className="pricing-premium pricing-premium--page flex-1">
         <div className="pricing-premium__bg pricing-premium__bg--radials" />

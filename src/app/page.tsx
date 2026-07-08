@@ -8,7 +8,7 @@ import WhatsAppButton from "@/components/ipf/WhatsAppButton";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header transparent />
       <main className="flex-1">
         <HeroSection />
         <ServicesSection />

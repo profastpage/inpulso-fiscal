@@ -6,6 +6,7 @@ import gsap from "gsap";
 import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
+import PageHero from "@/components/ipf/PageHero";
 
 /* ─── Inline SVG Icons ─────────────────────────────────────────────── */
 
@@ -92,7 +93,6 @@ const INITIAL_FORM: FormData = {
 export default function ContactoPage() {
   const formRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
 
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
   const [enviando, setEnviando] = useState(false);
@@ -144,24 +144,18 @@ export default function ContactoPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header transparent />
 
-      <main className="flex-1 pt-28 sm:pt-36 pb-20 sm:pb-24">
+      <main className="flex-1 pb-20 sm:pb-24">
+        <PageHero
+          badge="Contáctenos"
+          title={<>Estamos aquí para <span>ayudarle</span></>}
+          subtitle="¿Tiene alguna consulta sobre nuestros servicios, publicaciones o cursos? Complete el formulario o contáctenos directamente."
+          gradient="linear-gradient(135deg, #0f172a 0%, #072848 50%, #03589c 100%)"
+          pattern="radial-gradient(circle at 50% 50%, rgba(14,140,225,0.15) 0%, transparent 60%)"
+        />
+
         <div className="container mx-auto px-6">
-          {/* ── Page Header ──────────────────────────────────────── */}
-          <div ref={headerRef} className="max-w-4xl mb-14">
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand-600 mb-4 block">
-              CONTÁCTENOS
-            </span>
-            <h1 className="text-4xl lg:text-6xl font-display font-extrabold text-navy-950 mb-6 leading-tight">
-              Estamos aquí para{" "}
-              <span className="text-brand-700">ayudarle</span>
-            </h1>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
-              ¿Tiene alguna consulta sobre nuestros servicios, publicaciones
-              o cursos? Complete el formulario o contáctenos directamente.
-            </p>
-          </div>
 
           {/* ── Two-column Layout ────────────────────────────────── */}
           <div className="grid lg:grid-cols-5 gap-10">

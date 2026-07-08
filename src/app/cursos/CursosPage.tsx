@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
+import PageHero from "@/components/ipf/PageHero";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -584,28 +585,18 @@ export default function CursosPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header transparent />
 
-      <main className="flex-1 pt-24 sm:pt-32 pb-20 sm:pb-24">
+      <main className="flex-1 pb-20 sm:pb-24">
+        <PageHero
+          badge="Excelencia Académica"
+          title={<>Programas de <span>Alta Especialización</span> en Gestión Pública</>}
+          subtitle="Capacitación técnica de nivel avanzado para profesionales que lideran el sector público peruano."
+          gradient="linear-gradient(135deg, #0f172a 0%, #072848 40%, #03589c 100%)"
+          pattern="radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 50%)"
+        />
+
         <div className="container mx-auto px-6">
-          {/* Header Section */}
-          <div className="max-w-4xl mb-14 sm:mb-20">
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand-600 mb-4 block">
-              Excelencia Académica
-            </span>
-            <h1 className="text-4xl lg:text-6xl font-display font-extrabold text-navy-950 mb-8 leading-tight">
-              Programas de{" "}
-              <span className="text-brand-700">
-                Alta Especialización
-              </span>{" "}
-              en Gestión Pública
-            </h1>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
-              Capacitación técnica de nivel avanzado para profesionales
-              que lideran el sector público peruano. Formación basada en
-              la experiencia real y el rigor institucional.
-            </p>
-          </div>
 
           {/* Filtering System */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8 mb-10 sm:mb-16">

@@ -7,6 +7,7 @@ import {
   Sparkles,
   FileText,
   GraduationCap,
+  Briefcase,
   X,
   User,
   Mail,
@@ -24,6 +25,12 @@ const navLinks = [
 
 const serviceLinks = [
   {
+    icon: <Briefcase className="w-4 h-4 text-brand-600" />,
+    label: "OSESA",
+    desc: "Órgano de Supervisión de Servicios de Salud",
+    href: "/osesa",
+  },
+  {
     icon: <FileText className="w-4 h-4 text-brand-600" />,
     label: "Semana Fiscal",
     desc: "Publicaciones y análisis técnico",
@@ -37,7 +44,11 @@ const serviceLinks = [
   },
 ];
 
-export default function Header() {
+interface HeaderProps {
+  transparent?: boolean;
+}
+
+export default function Header({ transparent = false }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -62,17 +73,23 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
+  const isTransparent = transparent && !scrolled;
+
   return (
     <>
       <header
-        className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}
+        className={`site-header ${scrolled ? "site-header--scrolled" : ""} ${isTransparent ? "site-header--transparent" : ""}`}
       >
         <div className="site-header__inner">
           {/* Brand */}
           <a href="/" className="site-brand" aria-label="Instituto Pulso Fiscal - Inicio">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Logo IPF" className="site-brand__logo" />
-            <span className="site-brand__copy">
+            <img
+              src="/logo.png"
+              alt="Logo IPF"
+              className={`site-brand__logo ${isTransparent ? "site-brand__logo--white" : ""}`}
+            />
+            <span className={`site-brand__copy ${isTransparent ? "site-brand__copy--white" : ""}`}>
               <strong>INSTITUTO PULSO FISCAL</strong>
               <small>Especialistas en macroeconomía y gestión pública</small>
             </span>
@@ -84,7 +101,7 @@ export default function Header() {
               <a
                 key={link.label}
                 href={link.href}
-                className={`nav-link ${link.active ? "nav-link--active" : ""}`}
+                className={`nav-link ${isTransparent ? "nav-link--white" : ""} ${link.active ? "nav-link--active" : ""}`}
               >
                 {link.label}
               </a>
@@ -96,7 +113,7 @@ export default function Header() {
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
             >
-              <button className="nav-link" type="button">
+              <button className={`nav-link ${isTransparent ? "nav-link--white" : ""}`} type="button">
                 Nuestros Servicios
                 <ChevronDown
                   className={`w-3.5 h-3.5 ml-1 transition-transform duration-200 ${
@@ -127,7 +144,7 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
-            <a href="/contacto" className="nav-link">
+            <a href="/contacto" className={`nav-link ${isTransparent ? "nav-link--white" : ""}`}>
               Contacto
             </a>
           </nav>
@@ -142,7 +159,7 @@ export default function Header() {
 
           {/* Mobile Toggle */}
           <button
-            className="site-header__toggle"
+            className={`site-header__toggle ${isTransparent ? "site-header__toggle--white" : ""}`}
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menú"
@@ -188,13 +205,21 @@ export default function Header() {
                   {link.label}
                 </a>
               ))}
-              <a
-                href="#"
-                className="mobile-drawer__link"
-                onClick={closeMobile}
-              >
-                Nuestros Servicios
-              </a>
+              <div className="mobile-drawer__section-label">Nuestros Servicios</div>
+              {serviceLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  className="mobile-drawer__link mobile-drawer__link--sub"
+                  onClick={closeMobile}
+                >
+                  {s.icon}
+                  <div>
+                    <span>{s.label}</span>
+                    <small>{s.desc}</small>
+                  </div>
+                </a>
+              ))}
               <a
                 href="/contacto"
                 className="mobile-drawer__link"

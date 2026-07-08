@@ -1,15 +1,12 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { Check, Target, Eye, Users } from "lucide-react";
+import { useRef } from "react";
+import { Check, Target, Eye } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@/components/ipf/Header";
 import Footer from "@/components/ipf/Footer";
 import WhatsAppButton from "@/components/ipf/WhatsAppButton";
-
-gsap.registerPlugin(ScrollTrigger);
+import PageHero from "@/components/ipf/PageHero";
 
 const metrics = [
   { value: "15+", label: "Años de experiencia" },
@@ -32,7 +29,6 @@ const team = [
 ];
 
 export default function NosotrosPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
   const historyRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
@@ -41,48 +37,28 @@ export default function NosotrosPage() {
   const isInViewMission = useInView(missionRef, { once: true, margin: "-100px" });
   const isInViewTeam = useInView(teamRef, { once: true, margin: "-100px" });
 
-  useEffect(() => {
-    if (!heroRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.from(".metric-item", {
-        scrollTrigger: { trigger: ".metric-item", start: "top 90%" },
-        opacity: 0, y: 20, duration: 0.5, stagger: 0.1,
-      });
-    }, heroRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header transparent />
 
-      <main className="flex-1 pt-[76px]">
-        {/* Hero */}
-        <section ref={heroRef} className="bg-[#EFF6FF] min-h-[480px] grid grid-cols-1 md:grid-cols-2 items-center overflow-hidden">
-          <div className="h-full w-full flex items-center justify-center p-8 lg:p-12">
-            <div className="max-w-full max-h-[400px] rounded-[32px] bg-gradient-to-br from-brand-500 to-brand-800 w-[340px] h-[340px] flex items-center justify-center shadow-2xl shadow-brand-200">
-              <span className="text-white font-display font-black text-6xl opacity-30">IPF</span>
-            </div>
+      <main className="flex-1">
+        <PageHero
+          badge="Institución"
+          title={<>Referente Independiente en <span>Investigación Económica</span></>}
+          subtitle="Centro de investigación dedicado al estudio de la macroeconomía, las finanzas públicas y la gestión pública."
+          gradient="linear-gradient(135deg, #020617 0%, #072848 50%, #064b81 100%)"
+          pattern="radial-gradient(circle at 70% 30%, rgba(14,140,225,0.2) 0%, transparent 60%)"
+        >
+          {/* Metrics row */}
+          <div className="flex flex-wrap gap-x-10 gap-y-6 mt-10">
+            {metrics.map((m) => (
+              <div key={m.label} className="flex flex-col">
+                <span className="text-2xl sm:text-3xl font-bold text-white">{m.value}</span>
+                <span className="text-[11px] font-semibold text-white/50 uppercase tracking-[0.5px] mt-1">{m.label}</span>
+              </div>
+            ))}
           </div>
-
-          <div className="p-12 lg:p-16">
-            <span className="block text-[13px] text-[#6B7280] font-normal mb-2 uppercase tracking-wide">
-              Institución
-            </span>
-            <h1 className="text-[clamp(1.8rem,4vw,2.25rem)] font-display font-extrabold text-[#111827] leading-[1.2] mb-8">
-              Referente Independiente en Investigación Económica
-            </h1>
-
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 mt-8">
-              {metrics.map((m) => (
-                <div key={m.label} className="flex flex-col metric-item">
-                  <span className="text-[28px] font-bold text-[#1D4ED8]">{m.value}</span>
-                  <span className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[0.5px]">{m.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        </PageHero>
 
         {/* Historia */}
         <section className="bg-white py-24">

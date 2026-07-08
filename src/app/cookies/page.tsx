@@ -31,7 +31,7 @@ function CookiesPage() {
     <div className="min-h-screen flex flex-col bg-slate-50">
       {/* Nav */}
       <nav className="bg-navy-950 border-b border-white/5">
-        <div className="max-w-[1200px] mx-auto px-6 py-4 flex items-center gap-3">
+        <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.png" alt="Logo IPF" className="w-9 h-9 rounded-[8px] object-cover" />
           <a href="/" className="text-white/70 hover:text-white text-sm font-semibold transition-colors">
@@ -41,7 +41,7 @@ function CookiesPage() {
       </nav>
 
       {/* Hero */}
-      <section className="bg-navy-950 pt-12 pb-20 relative overflow-hidden">
+      <section className="bg-navy-950 pt-16 sm:pt-20 pb-28 sm:pb-36 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_-20%,rgba(14,140,225,0.12),transparent)]" />
         <div className="relative max-w-[1200px] mx-auto px-6 text-center">
           <span className="inline-block text-[10px] font-black tracking-[0.25em] uppercase text-brand-400/60 bg-brand-400/5 border border-brand-400/10 rounded-full px-5 py-1.5 mb-6">
@@ -58,7 +58,7 @@ function CookiesPage() {
 
       {/* Content */}
       <main className="flex-1 -mt-8 relative z-10">
-        <div className="max-w-[820px] mx-auto px-6 pb-24">
+        <div className="max-w-[860px] mx-auto px-6 pb-24">
           <div className="bg-white rounded-2xl shadow-lg shadow-navy-950/5 border border-slate-100 p-8 md:p-12">
             <p className="text-slate-600 text-[15px] leading-relaxed mb-8">
               Esta sección está preparada para describir el uso de cookies técnicas, analíticas y de terceros dentro del sitio web del Instituto Pulso Fiscal.
