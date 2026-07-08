@@ -68,10 +68,11 @@ export default function Footer() {
   ];
 
   const bottomLinks = [
-    { label: "Privacidad", href: "#" },
-    { label: "Términos y Condiciones", href: "#" },
-    { label: "Libro de Reclamaciones", href: "#" },
-    { label: "Cookies", href: "#" },
+    { label: "Privacidad", href: "/privacidad" },
+    { label: "Términos y Condiciones", href: "/terminos" },
+    { label: "Libro de Reclamaciones", href: "/reclamaciones" },
+    { label: "Devoluciones y Reembolsos", href: "/devoluciones" },
+    { label: "Cookies", href: "/cookies" },
   ];
 
   return (
@@ -95,9 +96,8 @@ export default function Footer() {
                 marginBottom: 20,
               }}
             >
-              <div className="w-[42px] h-[42px] rounded-[10px] bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white font-display font-black text-sm">
-                IPF
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="Logo IPF" style={{ width: 42, height: 42, borderRadius: 10, objectFit: 'cover' }} />
               <div
                 style={{
                   fontWeight: 900,
