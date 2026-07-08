@@ -1,0 +1,853 @@
+     1→     1→
+     2→     2→<!DOCTYPE html>
+     3→     3→<html lang="es" class="scroll-smooth">
+     4→     4→<head>
+     5→     5→    <meta charset="UTF-8">
+     6→     6→    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     7→     7→    <title>Inicio | Instituto Pulso Fiscal</title>
+     8→     8→    <meta name="description" content="Portal líder en análisis económico, política fiscal y gestión pública en Perú. Think Tank especializado en macroeconomía y presupuesto público.">
+     9→     9→
+    10→    10→    <!-- Fonts -->
+    11→    11→    <link rel="preconnect" href="https://fonts.googleapis.com">
+    12→    12→    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    13→    13→    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    14→    14→
+    15→    15→    <!-- Bootstrap Icons -->
+    16→    16→    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    17→    17→
+    18→    18→    <!-- Tailwind CSS -->
+    19→    19→    <script src="https://cdn.tailwindcss.com"></script>
+    20→    20→    <script>
+    21→    21→        tailwind.config = {
+    22→    22→            theme: {
+    23→    23→                extend: {
+    24→    24→                    colors: {
+    25→    25→                        brand: {
+    26→    26→                            50: '#f0f7ff',
+    27→    27→                            100: '#e0effe',
+    28→    28→                            200: '#bae2fd',
+    29→    29→                            300: '#7cc8fb',
+    30→    30→                            400: '#38aaf7',
+    31→    31→                            500: '#0e8ce1',
+    32→    32→                            600: '#026fc1',
+    33→    33→                            700: '#03589c',
+    34→    34→                            800: '#064b81',
+    35→    35→                            900: '#0b3f6b',
+    36→    36→                            950: '#072848',
+    37→    37→                        },
+    38→    38→                        navy: {
+    39→    39→                            700: '#1e293b',
+    40→    40→                            800: '#1e293b',
+    41→    41→                            900: '#0f172a',
+    42→    42→                            950: '#020617',
+    43→    43→                        }
+    44→    44→                    },
+    45→    45→                    fontFamily: {
+    46→    46→                        sans: ['Inter', 'sans-serif'],
+    47→    47→                        display: ['Plus Jakarta Sans', 'sans-serif'],
+    48→    48→                    },
+    49→    49→                    animation: {
+    50→    50→                        'float': 'float 6s ease-in-out infinite',
+    51→    51→                        'spin-slow': 'spin 8s linear infinite',
+    52→    52→                    },
+    53→    53→                    keyframes: {
+    54→    54→                        float: {
+    55→    55→                            '0%, 100%': { transform: 'translateY(0)' },
+    56→    56→                            '50%': { transform: 'translateY(-20px)' },
+    57→    57→                        }
+    58→    58→                    }
+    59→    59→                }
+    60→    60→            }
+    61→    61→        }
+    62→    62→    </script>
+    63→    63→
+    64→    64→    <!-- Lucide Icons -->
+    65→    65→    <script src="https://unpkg.com/lucide@latest"></script>
+    66→    66→
+    67→    67→    <!-- Culqi Checkout -->
+    68→    68→                <script src="https://checkout.culqi.com/js/v4"></script>
+    69→    69→    
+    70→    70→    <!-- Server Data -->
+    71→    71→    <script>
+    72→    72→        window.__IPF = {"isLoggedIn":false,"userName":"","userEmail":"","culqiConfigured":true,"culqiPublicKey":"pk_live_O3HVawHs1fTessM1","currentTab":"dashboard","userProfile":{"telefono":"","departamento":"","provincia":"","distrito":"","profesion":"","grado_instruccion":""}};
+    73→    73→    </script>
+    74→    74→
+    75→    75→    <!-- Alpine.js -->
+    76→    76→    <script defer src="/assets/js/alpine.min.js"></script>
+    77→    77→
+    78→    78→    <!-- Custom Styles -->
+    79→    79→    <link rel="stylesheet" href="/assets/css/styles.css">
+    80→    80→
+    81→    81→    <!-- Prevent FOUC for Alpine.js x-cloak -->
+    82→    82→    <style>
+    83→    83→        [x-cloak] { display: none !important; }
+    84→    84→    </style>
+    85→    85→</head>
+    86→    86→<body class="bg-slate-50 text-slate-900 font-sans selection:bg-brand-100 selection:text-brand-900"
+    87→    87→      x-data="ipfApp()" @scroll.window="scrolled = (window.pageYOffset > 20)">
+    88→    88→
+    89→    89→<header class="site-header">
+    90→    90→  <div class="site-header__inner">
+    91→    91→    <a href="/index.php" class="site-brand" aria-label="Instituto Pulso Fiscal - Inicio">
+    92→    92→      <img src="/logo.jpeg" alt="Logo IPF" class="site-brand__logo">
+    93→    93→      <span class="site-brand__copy">
+    94→    94→        <strong>INSTITUTO PULSO FISCAL</strong>
+    95→    95→        <small>Especialistas en macroeconomía y gestión pública</small>
+    96→    96→      </span>
+    97→    97→    </a>
+    98→    98→
+    99→    99→    <button class="site-header__toggle" type="button" @click="mobileMenu = !mobileMenu" :aria-expanded="mobileMenu.toString()" aria-label="Abrir menú">
+   100→   100→      <i data-lucide="menu" class="w-5 h-5"></i>
+   101→   101→    </button>
+   102→   102→
+   103→   103→    <nav class="site-nav" :class="mobileMenu ? 'site-nav--open' : ''">
+   104→   104→        <a href="index.php" class="nav-link active">Inicio</a>
+   105→   105→        <a href="nosotros.php" class="nav-link ">Nosotros</a>
+   106→   106→        <div class="nav-dropdown" @mouseenter="servicesOpen = true" @mouseleave="servicesOpen = false">
+   107→   107→            <button class="nav-link " type="button">
+   108→   108→                Nuestros Servicios
+   109→   109→                <i data-lucide="chevron-down" class="w-3.5 h-3.5 ml-1 transition-transform" :class="servicesOpen ? 'rotate-180' : ''"></i>
+   110→   110→            </button>
+   111→   111→            <div class="nav-dropdown__menu" x-show="servicesOpen" x-cloak
+   112→   112→                 x-transition:enter="transition ease-out duration-200"
+   113→   113→                 x-transition:enter-start="opacity-0"
+   114→   114→                 x-transition:enter-end="opacity-100"
+   115→   115→                 x-transition:leave="transition ease-in duration-150"
+   116→   116→                 x-transition:leave-start="opacity-100"
+   117→   117→                 x-transition:leave-end="opacity-0">
+   118→   118→                <a href="reportes.php" class="nav-dropdown__item">
+   119→   119→                    <i data-lucide="file-text" class="w-4 h-4 text-brand-600"></i>
+   120→   120→                    <div>
+   121→   121→                        <span class="nav-dropdown__label">Semana Fiscal</span>
+   122→   122→                        <span class="nav-dropdown__desc">Publicaciones y análisis técnico</span>
+   123→   123→                    </div>
+   124→   124→                </a>
+   125→   125→                <a href="cursos.php" class="nav-dropdown__item">
+   126→   126→                    <i data-lucide="graduation-cap" class="w-4 h-4 text-brand-600"></i>
+   127→   127→                    <div>
+   128→   128→                        <span class="nav-dropdown__label">Cursos</span>
+   129→   129→                        <span class="nav-dropdown__desc">Formación especializada</span>
+   130→   130→                    </div>
+   131→   131→                </a>
+   132→   132→            </div>
+   133→   133→        </div>
+   134→   134→        <a href="contacto.php" class="nav-link ">Contacto</a>
+   135→   135→                    <button @click="authModal = true; authMode = 'login'; mobileMenu = false" class="site-nav__login-mobile">Iniciar sesión</button>
+   136→   136→            </nav>
+   137→   137→
+   138→   138→    <div class="site-header__actions">
+   139→   139→                    <button @click="authModal = true; authMode = 'login'" class="site-header__login">Iniciar sesión</button>
+   140→   140→            <a href="suscripciones.php" class="site-header__subscribe">
+   141→   141→                <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+   142→   142→                Suscribirse
+   143→   143→            </a>
+   144→   144→            </div>
+   145→   145→  </div>
+   146→   146→</header>
+   147→   147→
+   148→   148→<script>
+   149→   149→function ipfApp() {
+   150→   150→    var S = window.__IPF || {};
+   151→   151→    return {
+   152→   152→        mobileMenu: false,
+   153→   153→        servicesOpen: false,
+   154→   154→        scrolled: false,
+   155→   155→        sidebar: true,
+   156→   156→        currentTab: S.currentTab || 'dashboard',
+   157→   157→        authModal: false,
+   158→   158→        authMode: 'login',
+   159→   159→        chatOpen: false,
+   160→   160→        paymentModal: false,
+   161→   161→        paymentPlan: { kicker: '', name: '', amount: '', decimal: '', period: '', plan_slug: '', precio_cents: 0 },
+   162→   162→        paymentStep: 1,
+   163→   163→        paymentResult: { plan_name: '', fecha_inicio: '', fecha_vencimiento: '' },
+   164→   164→        _personalData: {},
+   165→   165→        culqiConfigured: S.culqiConfigured || false,
+   166→   166→        culqiPublicKey: S.culqiPublicKey || '',
+   167→   167→        isLoggedIn: S.isLoggedIn || false,
+   168→   168→        userName: S.userName || '',
+   169→   169→        userEmail: S.userEmail || '',
+   170→   170→        userProfile: S.userProfile || {},
+   171→   171→
+   172→   172→        async handleAuth(e) {
+   173→   173→            var formData = new FormData(e.target);
+   174→   174→            var data = Object.fromEntries(formData.entries());
+   175→   175→            var endpoint = this.authMode === 'login' ? 'auth-login.php' : 'auth-registro.php';
+   176→   176→            try {
+   177→   177→                var response = await fetch(endpoint, {
+   178→   178→                    method: 'POST',
+   179→   179→                    headers: { 'Content-Type': 'application/json' },
+   180→   180→                    body: JSON.stringify(data)
+   181→   181→                });
+   182→   182→                var result = await response.json();
+   183→   183→                if (result.success) {
+   184→   184→                    this.isLoggedIn = true;
+   185→   185→                    this.authModal = false;
+   186→   186→                    if (this.paymentPlan.kicker) {
+   187→   187→                        this.paymentModal = true;
+   188→   188→                    } else {
+   189→   189→                        window.location.href = 'dashboard.php';
+   190→   190→                    }
+   191→   191→                } else {
+   192→   192→                    alert(result.message);
+   193→   193→                }
+   194→   194→            } catch (error) {
+   195→   195→                alert('Error de conexión');
+   196→   196→            }
+   197→   197→        },
+   198→   198→
+   199→   199→        initPayment(plan) {
+   200→   200→            var kicker = plan.kicker || '';
+   201→   201→            var name = plan.name || plan.nombre || '';
+   202→   202→            var amount = plan.amount || plan.precio_monto || '';
+   203→   203→            var decimal = plan.decimal || plan.precio_decimal || '';
+   204→   204→            var periodo = plan.periodo || '';
+   205→   205→            var period = plan.period || '';
+   206→   206→            if (!period && periodo) {
+   207→   207→                period = periodo === 'mensual' ? 'por mes' : 'por año';
+   208→   208→            }
+   209→   209→            var nivel = kicker.toLowerCase().includes('premium') ? 'premium' : 'basico';
+   210→   210→            var tipo = periodo || (name.toLowerCase().includes('anual') ? 'anual' : 'mensual');
+   211→   211→            var total = parseFloat(amount + decimal) || 0;
+   212→   212→
+   213→   213→            this.paymentPlan = {
+   214→   214→                kicker: kicker, name: name, amount: amount, decimal: decimal, period: period,
+   215→   215→                plan_slug: nivel + '_' + tipo,
+   216→   216→                precio_cents: Math.round(total * 100),
+   217→   217→                culqi_plan_id: plan.culqi_plan_id || ''
+   218→   218→            };
+   219→   219→
+   220→   220→            if (!this.isLoggedIn) {
+   221→   221→                this.authMode = 'register';
+   222→   222→                this.authModal = true;
+   223→   223→                return;
+   224→   224→            }
+   225→   225→            this.paymentStep = 1;
+   226→   226→            this.paymentModal = true;
+   227→   227→            this.$nextTick(function() { lucide.createIcons(); });
+   228→   228→        },
+   229→   229→
+   230→   230→        openCulqiCheckout() {
+   231→   231→            if (!this.culqiConfigured) {
+   232→   232→                alert('La pasarela de pago no está configurada.');
+   233→   233→                return;
+   234→   234→            }
+   235→   235→
+   236→   236→            var planId = this.paymentPlan.culqi_plan_id;
+   237→   237→            if (!planId) {
+   238→   238→                alert('Este plan no está configurado para pagos. Contacte al administrador.');
+   239→   239→                return;
+   240→   240→            }
+   241→   241→
+   242→   242→            var form = document.getElementById('payment-form');
+   243→   243→            var fd = new FormData(form);
+   244→   244→            this._personalData = Object.fromEntries(fd.entries());
+   245→   245→
+   246→   246→            Culqi.publicKey = this.culqiPublicKey;
+   247→   247→            Culqi.settings({
+   248→   248→                title: 'Instituto Pulso Fiscal',
+   249→   249→                currency: 'PEN',
+   250→   250→                amount: this.paymentPlan.precio_cents,
+   251→   251→                description: this.paymentPlan.kicker + ' ' + this.paymentPlan.name
+   252→   252→            });
+   253→   253→            Culqi.options({
+   254→   254→                lang: 'es',
+   255→   255→                installments: false,
+   256→   256→                paymentMethods: {
+   257→   257→                    tarjeta: true,
+   258→   258→                    yape: true,
+   259→   259→                    bancaMovil: false,
+   260→   260→                    agente: false,
+   261→   261→                    billetera: false,
+   262→   262→                    cuotealo: false
+   263→   263→                }
+   264→   264→            });
+   265→   265→            Culqi.open();
+   266→   266→        },
+   267→   267→
+   268→   268→        async handleCulqiToken(tokenId) {
+   269→   269→            this.paymentStep = 2;
+   270→   270→            try {
+   271→   271→                var response = await fetch('procesar-pago.php', {
+   272→   272→                    method: 'POST',
+   273→   273→                    headers: { 'Content-Type': 'application/json' },
+   274→   274→                    body: JSON.stringify({
+   275→   275→                        token_id: tokenId,
+   276→   276→                        plan_slug: this.paymentPlan.plan_slug,
+   277→   277→                        personal: this._personalData
+   278→   278→                    })
+   279→   279→                });
+   280→   280→                var result = await response.json();
+   281→   281→                if (result.success) {
+   282→   282→                    this.paymentStep = 3;
+   283→   283→                    this.paymentResult = result.data;
+   284→   284→                    this.$nextTick(function() { lucide.createIcons(); });
+   285→   285→                } else {
+   286→   286→                    alert('Error: ' + result.message);
+   287→   287→                    this.paymentStep = 1;
+   288→   288→                }
+   289→   289→            } catch (e) {
+   290→   290→                console.error(e);
+   291→   291→                alert('Error de conexión con el servidor.');
+   292→   292→                this.paymentStep = 1;
+   293→   293→            }
+   294→   294→        }
+   295→   295→    };
+   296→   296→}
+   297→   297→</script>
+   298→   298→
+   299→   299→<main>
+   300→   300→  <section class="home-hero relative overflow-hidden" 
+   301→   301→           x-data="{ 
+   302→   302→             active: 0, 
+   303→   303→             slides: ['assets/img/imgsld1.jpg', 'assets/img/imgsld2.jpg', 'assets/img/imgsld3.jpg'],
+   304→   304→             promotion: {
+   305→   305→               active: false,
+   306→   306→               text: '¡Nuevo Curso: Gestión Pública 2026!',
+   307→   307→               link: '/cursos.php'
+   308→   308→             }
+   309→   309→           }" 
+   310→   310→           x-init="setInterval(() => active = (active + 1) % slides.length, 1500)">
+   311→   311→    <!-- Rotating Background — x-cloak evita el fondo azul antes de que Alpine.js inicialice -->
+   312→   312→    <div class="absolute inset-0 z-0" x-cloak>
+   313→   313→      <template x-for="(slide, index) in slides" :key="slide">
+   314→   314→        <div 
+   315→   315→          class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+   316→   316→          :style="`background-image: url('${slide}')`"
+   317→   317→          x-show="active === index"
+   318→   318→          x-transition:enter="opacity-0"
+   319→   319→          x-transition:enter-start="opacity-0"
+   320→   320→          x-transition:enter-end="opacity-100"
+   321→   321→          x-transition:leave="opacity-100"
+   322→   322→          x-transition:leave-start="opacity-100"
+   323→   323→          x-transition:leave-end="opacity-0"
+   324→   324→        >
+   325→   325→          <!-- Overlay to ensure text readability -->
+   326→   326→          <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+   327→   327→        </div>
+   328→   328→      </template>
+   329→   329→    </div>
+   330→   330→
+   331→   331→    <!-- Navigation Arrows -->
+   332→   332→    <div class="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+   333→   333→      <button @click="active = (active + 1) % slides.length" 
+   334→   334→              class="w-14 h-14 bg-white/20 hover:bg-white/40 backdrop-blur-md text-navy-900 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95 border border-white/30 shadow-xl group">
+   335→   335→        <i data-lucide="chevron-right" class="w-8 h-8 group-hover:translate-x-0.5 transition-transform"></i>
+   336→   336→      </button>
+   337→   337→    </div>
+   338→   338→
+   339→   339→    <div class="home-shell relative z-10">
+   340→   340→      <div class="max-w-3xl py-20 px-2 sm:px-0">
+   341→   341→        <!-- Espacio para promociones futuras -->
+   342→   342→        <template x-if="promotion.active">
+   343→   343→          <a :href="promotion.link" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold mb-6 hover:bg-brand-100 transition-colors">
+   344→   344→            <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
+   345→   345→            <span x-text="promotion.text"></span>
+   346→   346→            <i data-lucide="arrow-right" class="w-3 h-3"></i>
+   347→   347→          </a>
+   348→   348→        </template>
+   349→   349→
+   350→   350→        <span class="home-kicker">Instituto Pulso Fiscal</span>
+   351→   351→        <h1 class="text-navy-950">Tu fuente confiable de <span>conocimiento y análisis</span> económico y fiscal</h1>
+   352→   352→        <p class="text-lg text-slate-600 mt-6">Análisis especializados, publicaciones técnicas y cursos sobre macroeconomía, política fiscal, presupuesto público y gestión pública.</p>
+   353→   353→        <div class="home-actions mt-10 flex-col sm:flex-row">
+   354→   354→          <a href="suscripciones.php" class="btn-primary w-full sm:w-auto justify-center">Conoce nuestros planes <i data-lucide="zap" class="w-5 h-5"></i></a>
+   355→   355→          <a href="#servicios" class="text-navy-900 font-bold hover:text-brand-600 transition-colors flex items-center gap-2 sm:ml-8 justify-center">
+   356→   356→            Ver servicios
+   357→   357→            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+   358→   358→          </a>
+   359→   359→        </div>
+   360→   360→      </div>
+   361→   361→    </div>
+   362→   362→
+   363→   363→    <!-- Carousel Indicators -->
+   364→   364→    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2"> 
+   365→   365→      <template x-for="(slide, index) in slides" :key="index"> 
+   366→   366→        <button 
+   367→   367→          @click="active = index" 
+   368→   368→          class="w-2 h-2 rounded-full transition-all duration-300" 
+   369→   369→          :class="active === index 
+   370→   370→            ? 'bg-brand-500 w-4' 
+   371→   371→            : 'bg-white/50 hover:bg-white/80'"> 
+   372→   372→        </button> 
+   373→   373→      </template> 
+   374→   374→    </div>
+   375→   375→  </section>
+   376→   376→
+   377→   377→  <section id="servicios" class="home-services">
+   378→   378→    <div class="home-shell">
+   379→   379→      <div class="home-section-head">
+   380→   380→        <span class="home-kicker">Nuestros servicios</span>
+   381→   381→        <h2>Información rigurosa para comprender el país</h2>
+   382→   382→        <p>Conozca nuestras publicaciones y programas de formación antes de elegir el contenido que necesita.</p>
+   383→   383→      </div>
+   384→   384→
+   385→   385→      <article class="service-feature">
+   386→   386→        <div class="service-feature__intro">
+   387→   387→          <span class="service-feature__number">01</span>
+   388→   388→          <h3>Semana Fiscal <small>Publicaciones</small></h3>
+   389→   389→          <div class="flex flex-wrap gap-2 mb-6">
+   390→   390→                          <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-bold uppercase tracking-wider">Macroeconomía</span>
+   391→   391→                          <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-bold uppercase tracking-wider">Política Fiscal</span>
+   392→   392→                          <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-bold uppercase tracking-wider">Presupuesto Público</span>
+   393→   393→                          <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-bold uppercase tracking-wider">Sistemas Administrativos</span>
+   394→   394→                          <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-bold uppercase tracking-wider">Gestión Pública</span>
+   395→   395→                          <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-bold uppercase tracking-wider">Políticas Públicas</span>
+   396→   396→                      </div>
+   397→   397→          <p>Análisis técnico de los pilares económicos del país: macroeconomía, política fiscal, presupuesto público, sistemas administrativos del Estado, gestión pública y políticas públicas.</p>
+   398→   398→          <a href="/reportes.php" class="service-link">Ver Publicaciones <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+   399→   399→        </div>
+   400→   400→        <div class="publication-types">
+   401→   401→                      <a href="/reportes.php?tipo=Art%C3%ADculos" class="publication-type group hover:bg-brand-50 transition-all duration-300">
+   402→   402→              <i data-lucide="file-text" class="w-5 h-5 text-brand-600 group-hover:scale-110 transition-transform"></i>
+   403→   403→              <div>
+   404→   404→                <h4 class="group-hover:text-brand-700 transition-colors">Artículos</h4>
+   405→   405→                <p>Análisis técnico, claro y breve de la coyuntura del país en macroeconomía, política fiscal, presupuesto público, gestión y políticas públicas.</p>
+   406→   406→              </div>
+   407→   407→            </a>
+   408→   408→                      <a href="/reportes.php?tipo=Reportes+peri%C3%B3dicos" class="publication-type group hover:bg-brand-50 transition-all duration-300">
+   409→   409→              <i data-lucide="bar-chart-3" class="w-5 h-5 text-brand-600 group-hover:scale-110 transition-transform"></i>
+   410→   410→              <div>
+   411→   411→                <h4 class="group-hover:text-brand-700 transition-colors">Reportes</h4>
+   412→   412→                <p>Seguimiento periódico de variables clave como el gasto público, déficit fiscal, PBI, inflación y tipo de cambio.</p>
+   413→   413→              </div>
+   414→   414→            </a>
+   415→   415→                      <a href="/reportes.php?tipo=Informes" class="publication-type group hover:bg-brand-50 transition-all duration-300">
+   416→   416→              <i data-lucide="notebook-text" class="w-5 h-5 text-brand-600 group-hover:scale-110 transition-transform"></i>
+   417→   417→              <div>
+   418→   418→                <h4 class="group-hover:text-brand-700 transition-colors">Informes</h4>
+   419→   419→                <p>Documentos de análisis más desarrollados que abordan los temas más relevantes en macroeconomía, política fiscal y gestión pública.</p>
+   420→   420→              </div>
+   421→   421→            </a>
+   422→   422→                      <a href="/reportes.php?tipo=Gu%C3%ADas+de+estudio" class="publication-type group hover:bg-brand-50 transition-all duration-300">
+   423→   423→              <i data-lucide="book-open-check" class="w-5 h-5 text-brand-600 group-hover:scale-110 transition-transform"></i>
+   424→   424→              <div>
+   425→   425→                <h4 class="group-hover:text-brand-700 transition-colors">Guías de Estudio</h4>
+   426→   426→                <p>Material explicativo y metodológico sobre el funcionamiento de la macroeconomía, política fiscal, sistemas administrativos-financieros y políticas públicas.</p>
+   427→   427→              </div>
+   428→   428→            </a>
+   429→   429→                      <a href="/reportes.php?tipo=Investigaciones" class="publication-type group hover:bg-brand-50 transition-all duration-300">
+   430→   430→              <i data-lucide="microscope" class="w-5 h-5 text-brand-600 group-hover:scale-110 transition-transform"></i>
+   431→   431→              <div>
+   432→   432→                <h4 class="group-hover:text-brand-700 transition-colors">Investigaciones</h4>
+   433→   433→                <p>Estudios estadísticos, econométricos, jurisprudenciales y académicos sobre problemáticas específicas del ámbito público y económico.</p>
+   434→   434→              </div>
+   435→   435→            </a>
+   436→   436→                  </div>
+   437→   437→      </article>
+   438→   438→
+   439→   439→      <article class="service-feature service-feature--courses">
+   440→   440→        <div class="service-feature__intro">
+   441→   441→          <span class="service-feature__number">02</span>
+   442→   442→          <h3>Cursos <small>Formación especializada</small></h3>
+   443→   443→          <p>Programas orientados a fortalecer capacidades técnicas para el sector público y privado.</p>
+   444→   444→          <a href="/cursos.php" class="service-link">Ver todos los cursos <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+   445→   445→        </div>
+   446→   446→        <div class="course-list">
+   447→   447→                      <a href="/cursos.php?search=Sistema+Nacional+de+Planeamiento+Estrat%C3%A9gico" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   448→   448→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   449→   449→              <span class="group-hover:text-brand-700 transition-colors">Sistema Nacional de Planeamiento Estratégico</span>
+   450→   450→            </a>
+   451→   451→                      <a href="/cursos.php?search=Sistema+Nacional+de+Presupuesto+P%C3%BAblico" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   452→   452→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   453→   453→              <span class="group-hover:text-brand-700 transition-colors">Sistema Nacional de Presupuesto Público</span>
+   454→   454→            </a>
+   455→   455→                      <a href="/cursos.php?search=Invierte.pe" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   456→   456→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   457→   457→              <span class="group-hover:text-brand-700 transition-colors">Invierte.pe</span>
+   458→   458→            </a>
+   459→   459→                      <a href="/cursos.php?search=Asociaciones+P%C3%BAblico-Privadas+%28APP%29" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   460→   460→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   461→   461→              <span class="group-hover:text-brand-700 transition-colors">Asociaciones Público-Privadas (APP)</span>
+   462→   462→            </a>
+   463→   463→                      <a href="/cursos.php?search=Obras+por+Impuestos+%28OxI%29" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   464→   464→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   465→   465→              <span class="group-hover:text-brand-700 transition-colors">Obras por Impuestos (OxI)</span>
+   466→   466→            </a>
+   467→   467→                      <a href="/cursos.php?search=La+Pol%C3%ADtica+Fiscal+y+el+Presupuesto+P%C3%BAblico+en+Per%C3%BA" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   468→   468→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   469→   469→              <span class="group-hover:text-brand-700 transition-colors">La Política Fiscal y el Presupuesto Público en Perú</span>
+   470→   470→            </a>
+   471→   471→                      <a href="/cursos.php?search=La+Descentralizaci%C3%B3n+Fiscal+en+el+Per%C3%BA" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   472→   472→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   473→   473→              <span class="group-hover:text-brand-700 transition-colors">La Descentralización Fiscal en el Perú</span>
+   474→   474→            </a>
+   475→   475→                      <a href="/cursos.php?search=An%C3%A1lisis+Macroecon%C3%B3mico+para+No+Economistas" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   476→   476→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   477→   477→              <span class="group-hover:text-brand-700 transition-colors">Análisis Macroeconómico para No Economistas</span>
+   478→   478→            </a>
+   479→   479→                      <a href="/cursos.php?search=Sistemas+Administrativos+del+Sector+P%C3%BAblico" class="course-list__item group hover:translate-x-2 transition-transform duration-300">
+   480→   480→              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-600"></i>
+   481→   481→              <span class="group-hover:text-brand-700 transition-colors">Sistemas Administrativos del Sector Público</span>
+   482→   482→            </a>
+   483→   483→                  </div>
+   484→   484→      </article>
+   485→   485→
+   486→   486→    </div>
+   487→   487→  </section>
+   488→   488→
+   489→   489→  <!-- El contenido de Planes de Suscripción ha sido movido a la página suscripciones.php -->
+   490→   490→
+   491→   491→  <!-- CTA Final -->
+   492→   492→  <section class="cta-final-v4">
+   493→   493→    <div class="cta-final-v4__badge">Oportunidad Institucional</div>
+   494→   494→    
+   495→   495→    <h2 class="cta-final-v4__title">
+   496→   496→      Eleve su toma de decisiones<br>
+   497→   497→      <span>con el rigor del IPF</span>
+   498→   498→    </h2>
+   499→   499→    
+   500→   500→    <p class="cta-final-v4__subtitle">
+   501→   501→      Únase hoy a nuestra red de suscriptores y acceda a la inteligencia fiscal más profunda del mercado peruano.
+   502→   502→    </p>
+   503→   503→
+   504→   504→    <div class="cta-final-v4__actions">
+   505→   505→      <a href="suscripciones.php" class="cta-final-v4__btn-primary">
+   506→   506→        Empezar Suscripción
+   507→   507→        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+   508→   508→      </a>
+   509→   509→      <a href="nosotros.php" class="cta-final-v4__btn-secondary">
+   510→   510→        Contactar Asesor
+   511→   511→      </a>
+   512→   512→    </div>
+   513→   513→
+   514→   514→    <div class="cta-final-v4__guarantees">
+   515→   515→      <div class="cta-final-v4__guarantee">
+   516→   516→        <i data-lucide="shield" class="w-4 h-4"></i>
+   517→   517→        Sin contratos de permanencia
+   518→   518→      </div>
+   519→   519→      <div class="cta-final-v4__guarantee">
+   520→   520→        <i data-lucide="zap" class="w-4 h-4"></i>
+   521→   521→        Acceso inmediato tras el pago
+   522→   522→      </div>
+   523→   523→      <div class="cta-final-v4__guarantee">
+   524→   524→        <i data-lucide="lock" class="w-4 h-4"></i>
+   525→   525→        Pago 100% seguro
+   526→   526→      </div>
+   527→   527→    </div>
+   528→   528→  </section>
+   529→   529→</main>
+   530→   530→
+   531→   531→    <footer id="contacto" style="background:#020617;color:rgba(255,255,255,0.7);padding:72px 24px 32px;">
+   532→   532→      <div style="max-width:1400px;margin:0 auto;">
+   533→   533→        <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:64px;margin-bottom:64px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,0.08);">
+   534→   534→          
+   535→   535→          <!-- Col 1: Brand -->
+   536→   536→          <div>
+   537→   537→            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+   538→   538→              <img src="/logo.jpeg" alt="Logo IPF" style="width:42px;height:42px;border-radius:10px;object-fit:cover;">
+   539→   539→              <div>
+   540→   540→                <div style="font-weight:900;font-size:14px;color:#fff;letter-spacing:0.05em;">INSTITUTO PULSO FISCAL</div>
+   541→   541→              </div>
+   542→   542→            </div>
+   543→   543→            <p style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.55);max-width:320px;font-weight:500;">Investigación independiente, análisis riguroso y formación de alto nivel para el fortalecimiento de la política económica del Perú.</p>
+   544→   544→            <div style="display:flex;gap:10px;margin-top:24px;">
+   545→   545→              <a href="https://www.linkedin.com/company/inpulsofiscal/?viewAsMember=true%20" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);text-decoration:none;">
+   546→   546→                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+   547→   547→                  <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.602 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM6.814 20.452H3.861V9h2.953v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.727v20.545C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.273V1.727C24 .774 23.2 0 22.222 0z"/>
+   548→   548→                </svg>
+   549→   549→              </a>
+   550→   550→              <a href="https://www.facebook.com/profile.php?id=61570780708496" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);text-decoration:none;">
+   551→   551→                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+   552→   552→                  <path fill="currentColor" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.028 1.792-4.702 4.533-4.702 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.49 0-1.953.93-1.953 1.887v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+   553→   553→                </svg>
+   554→   554→              </a>
+   555→   555→              <a href="https://www.instagram.com/inpulsofiscal/?hl=es" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);text-decoration:none;">
+   556→   556→                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+   557→   557→                  <path fill="currentColor" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm10.75 1.5a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+   558→   558→                </svg>
+   559→   559→              </a>
+   560→   560→              <a href="https://www.youtube.com/@InstitutoPulsoFiscal" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);text-decoration:none;">
+   561→   561→                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+   562→   562→                  <path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.016 3.016 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.121 2.136c1.872.505 9.377.505 9.377.505s7.505 0 9.377-.505a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z"/>
+   563→   563→                </svg>
+   564→   564→              </a>
+   565→   565→              <a href="https://www.tiktok.com/@inpulsofiscal?_t=8qYTiI1hXpl&_r=1%20" target="_blank" rel="noopener noreferrer" aria-label="TikTok" style="width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);text-decoration:none;">
+   566→   566→                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+   567→   567→                  <path fill="currentColor" d="M21 7.5a6.73 6.73 0 0 1-3.86-1.2A6.5 6.5 0 0 1 14.5 2h-3v13.2a2.7 2.7 0 1 1-2.1-2.63V9.5a5.7 5.7 0 1 0 5.1 5.66V9.38A9.74 9.74 0 0 0 21 11.4V7.5Z"/>
+   568→   568→                </svg>
+   569→   569→              </a>
+   570→   570→              <a href="https://x.com/inpulsofiscal?t=Rl-L_MDvsrUKLvwm3DL70Q&s=09" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" style="width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);text-decoration:none;">
+   571→   571→                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+   572→   572→                  <path fill="currentColor" d="M18.244 2H21l-6.52 7.455L22.5 22h-6.19l-4.85-6.39L5.87 22H3l6.98-7.98L1.5 2h6.35l4.38 5.78L18.244 2Zm-1.086 18h1.53L7.02 3.9H5.38l11.778 16.1Z"/>
+   573→   573→                </svg>
+   574→   574→              </a>
+   575→   575→            </div>
+   576→   576→          </div>
+   577→   577→
+   578→   578→          <!-- Col 2: Links -->
+   579→   579→          <div>
+   580→   580→            <div style="font-size:11px;font-weight:900;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:20px;">Navegación</div>
+   581→   581→            <div style="display:flex;flex-direction:column;gap:12px;">
+   582→   582→              <a href="index.php" style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.65);text-decoration:none;">Inicio</a>
+   583→   583→              <a href="servicios.php" style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.65);text-decoration:none;">Nuestros Servicios</a>
+   584→   584→              <a href="reportes.php" style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.65);text-decoration:none;">Reportes Técnicos</a>
+   585→   585→              <a href="cursos.php" style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.65);text-decoration:none;">Cursos y Formación</a>
+   586→   586→              <a href="nosotros.php" style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.65);text-decoration:none;">Sobre el Instituto</a>
+   587→   587→              <a href="contacto.php" style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.65);text-decoration:none;">Contacto</a>
+   588→   588→            </div>
+   589→   589→          </div>
+   590→   590→
+   591→   591→          <!-- Col 3: Contact -->
+   592→   592→          <div>
+   593→   593→            <div style="font-size:11px;font-weight:900;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:20px;">Contacto</div>
+   594→   594→            <div style="display:flex;flex-direction:column;gap:14px;">
+   595→   595→              <div style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;">Jr. Los Crisantemos 110,<br>Santiago de Surco, Lima, Perú</div>
+   596→   596→              <a href="mailto:consultas@inpulsofiscal.com" style="font-size:13px;color:rgba(124,200,251,0.9);text-decoration:none;">consultas@inpulsofiscal.com</a>
+   597→   597→              <a href="mailto:cursosipf@inpulsofiscal.com" style="font-size:13px;color:rgba(124,200,251,0.9);text-decoration:none;">cursosipf@inpulsofiscal.com</a>
+   598→   598→              <a href="tel:+51943279673" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;">+51 943 279 673</a>
+   599→   599→            </div>
+   600→   600→          </div>
+   601→   601→        </div>
+   602→   602→
+   603→   603→        <!-- Bottom bar -->
+   604→   604→        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+   605→   605→          <div style="font-size:12px;color:rgba(255,255,255,0.3);font-weight:600;">© 2026 Instituto Pulso Fiscal. Todos los derechos reservados.</div>
+   606→   606→          <div style="display:flex;flex-wrap:wrap;gap:16px 24px;">
+   607→   607→            <a href="privacidad.php" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;font-weight:600;">Privacidad</a>
+   608→   608→            <a href="terminos.php" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;font-weight:600;">Términos y Condiciones</a>
+   609→   609→            <a href="reclamaciones.php" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;font-weight:600;">Libro de Reclamaciones</a>
+   610→   610→            <a href="cookies.php" style="font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;font-weight:600;">Cookies</a>
+   611→   611→          </div>
+   612→   612→        </div>
+   613→   613→      </div>
+   614→   614→    </footer>
+   615→   615→
+   616→   616→    <a href="https://wa.me/51943279673" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style="position:fixed;right:20px;bottom:20px;width:58px;height:58px;border-radius:9999px;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 18px 40px rgba(2,6,23,0.18);border:1px solid rgba(255,255,255,0.28);z-index:120;text-decoration:none;transition:transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+   617→   617→      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 175.216 175.552" aria-hidden="true">
+   618→   618→        <defs><linearGradient id="wa-g" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#57d163"/><stop offset="1" stop-color="#23b33a"/></linearGradient></defs>
+   619→   619→        <path fill="#fff" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.89 60.89 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324a60.877 60.877 0 0 0 31.086 8.51h.029c33.707 0 61.14-27.426 61.153-61.135a60.766 60.766 0 0 0-17.895-43.251 60.748 60.748 0 0 0-43.201-17.915z"/>
+   620→   620→        <path fill="url(#wa-g)" d="M87.184 30.93a55.46 55.46 0 0 0-39.353 16.3 55.387 55.387 0 0 0-16.3 39.39 55.22 55.22 0 0 0 8.767 29.77l1.364 2.17-5.797 21.168 21.715-5.695 2.09 1.241a55.36 55.36 0 0 0 28.242 7.742h.022c30.56 0 55.436-24.863 55.447-55.418a55.095 55.095 0 0 0-16.218-39.37 55.087 55.087 0 0 0-39.979-17.298z"/>
+   621→   621→        <path fill="#fff" fill-rule="evenodd" d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043a6.76 6.76 0 0 0-4.894 2.3c-1.682 1.838-6.423 6.272-6.423 15.298 0 9.024 6.577 17.742 7.494 18.968.918 1.226 12.69 20.35 31.345 27.737 15.502 6.14 18.66 4.918 22.022 4.612 3.362-.306 10.849-4.434 12.378-8.714 1.529-4.28 1.529-7.952 1.07-8.716-.46-.765-1.685-1.225-3.525-2.145-1.838-.918-10.849-5.353-12.531-5.965-1.682-.612-2.907-.918-4.131.918-1.226 1.838-4.744 5.965-5.814 7.19-1.07 1.226-2.143.918-3.983-.306-7.664-3.373-12.396-6.272-17.317-14.225-1.309-2.25.13-2.089 3.742-6.95a3.401 3.401 0 0 0-.153-3.218c-.46-.918-4.13-9.946-5.814-13.593z" clip-rule="evenodd"/>
+   622→   622→      </svg>
+   623→   623→    </a>
+   624→   624→        <!-- Modal de Pago -->
+   625→   625→    <div x-show="paymentModal" x-cloak
+   626→   626→         class="fixed inset-0 z-[110] flex items-center justify-center p-4"
+   627→   627→         x-transition:enter="transition ease-out duration-300"
+   628→   628→         x-transition:enter-start="opacity-0"
+   629→   629→         x-transition:enter-end="opacity-100"
+   630→   630→         x-transition:leave="transition ease-in duration-200"
+   631→   631→         x-transition:leave-start="opacity-100"
+   632→   632→         x-transition:leave-end="opacity-0">
+   633→   633→
+   634→   634→        <!-- Backdrop -->
+   635→   635→        <div class="absolute inset-0 bg-navy-950/60 backdrop-blur-md" @click="paymentModal = false"></div>
+   636→   636→
+   637→   637→        <!-- Modal Content -->
+   638→   638→        <div class="relative bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+   639→   639→             @click.stop>
+   640→   640→
+   641→   641→            <!-- Step 1: Form -->
+   642→   642→            <div x-show="paymentStep === 1" class="flex flex-col overflow-hidden">
+   643→   643→                <!-- Header fijo -->
+   644→   644→                <div class="px-6 pt-5 pb-3 border-b border-slate-100 flex-shrink-0">
+   645→   645→                    <div class="flex items-center justify-between">
+   646→   646→                        <div>
+   647→   647→                            <h2 class="text-base font-display font-extrabold text-navy-950">Finalizar suscripción</h2>
+   648→   648→                            <p class="text-slate-400 text-[11px]" x-text="paymentPlan.kicker + ' ' + paymentPlan.name"></p>
+   649→   649→                        </div>
+   650→   650→                        <div class="text-right">
+   651→   651→                            <p class="text-lg font-black text-brand-700" x-text="'S/ ' + paymentPlan.amount + paymentPlan.decimal"></p>
+   652→   652→                            <p class="text-[9px] font-bold text-slate-400 uppercase" x-text="paymentPlan.period"></p>
+   653→   653→                        </div>
+   654→   654→                    </div>
+   655→   655→                </div>
+   656→   656→
+   657→   657→                <!-- Form con scroll -->
+   658→   658→                <div class="overflow-y-auto flex-1 px-6 py-4 custom-scrollbar">
+   659→   659→                    <form id="payment-form" @submit.prevent="openCulqiCheckout()" class="space-y-2">
+   660→   660→
+   661→   661→                        <p class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-300">Correo de facturación</p>
+   662→   662→
+   663→   663→                        <input type="email" name="email" required placeholder="Correo electrónico" :value="userEmail" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950">
+   664→   664→
+   665→   665→                        <p class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-300 mt-2">Datos adicionales <span class="text-slate-200 normal-case">(opcional)</span></p>
+   666→   666→
+   667→   667→                        <div class="grid grid-cols-2 gap-2">
+   668→   668→                            <select name="pais" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950">
+   669→   669→                                <option value="Perú" selected>Perú</option>
+   670→   670→                            </select>
+   671→   671→                            <input type="text" name="departamento" placeholder="Departamento" :value="userProfile.departamento" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950">
+   672→   672→                        </div>
+   673→   673→
+   674→   674→                        <div class="grid grid-cols-2 gap-2">
+   675→   675→                            <input type="text" name="provincia" placeholder="Provincia" :value="userProfile.provincia" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950">
+   676→   676→                            <input type="text" name="distrito" placeholder="Distrito" :value="userProfile.distrito" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950">
+   677→   677→                        </div>
+   678→   678→
+   679→   679→                        <input type="tel" name="celular" placeholder="N° de celular" :value="userProfile.telefono" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-xs text-navy-950">
+   680→   680→
+   681→   681→                        <!-- Checkboxes -->
+   682→   682→                        <div class="space-y-1.5 pt-2 border-t border-slate-100">
+   683→   683→                            <label class="flex items-center gap-2 cursor-pointer">
+   684→   684→                                <input type="checkbox" required class="w-3.5 h-3.5 rounded border-slate-300 text-brand-600 focus:ring-brand-500 flex-shrink-0">
+   685→   685→                                <span class="text-[11px] text-slate-500">Acepto los <a href="terminos.php" target="_blank" class="text-brand-700 font-bold underline">Términos y Condiciones</a></span>
+   686→   686→                            </label>
+   687→   687→                            <label class="flex items-center gap-2 cursor-pointer">
+   688→   688→                                <input type="checkbox" required class="w-3.5 h-3.5 rounded border-slate-300 text-brand-600 focus:ring-brand-500 flex-shrink-0">
+   689→   689→                                <span class="text-[11px] text-slate-500">Acepto la <a href="devoluciones.php" target="_blank" class="text-brand-700 font-bold underline">Política de Devoluciones y Reembolsos</a></span>
+   690→   690→                            </label>
+   691→   691→                        </div>
+   692→   692→
+   693→   693→                        <button type="submit" class="w-full py-3 bg-brand-700 hover:bg-brand-800 text-white rounded-xl font-bold text-sm shadow-lg shadow-brand-900/10 transition-all active:scale-[0.98] flex items-center justify-center gap-2 mt-1">
+   694→   694→                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+   695→   695→                            Proceder al pago
+   696→   696→                        </button>
+   697→   697→
+   698→   698→                        <p class="text-center text-[9px] text-slate-400 flex items-center justify-center gap-1 pb-1">
+   699→   699→                            <i data-lucide="lock" class="w-2.5 h-2.5"></i>
+   700→   700→                            Pagos seguros procesados por Culqi
+   701→   701→                        </p>
+   702→   702→                    </form>
+   703→   703→                </div>
+   704→   704→            </div>
+   705→   705→
+   706→   706→            <!-- Step 2: Loading -->
+   707→   707→            <div x-show="paymentStep === 2" class="p-14 text-center">
+   708→   708→                <div class="relative w-14 h-14 mx-auto mb-5">
+   709→   709→                    <div class="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
+   710→   710→                    <div class="absolute inset-0 border-4 border-brand-600 rounded-full border-t-transparent animate-spin"></div>
+   711→   711→                </div>
+   712→   712→                <h3 class="text-lg font-display font-extrabold text-navy-950 mb-1">Procesando pago</h3>
+   713→   713→                <p class="text-slate-500 text-sm">Validando la transacción...</p>
+   714→   714→            </div>
+   715→   715→
+   716→   716→            <!-- Step 3: Success -->
+   717→   717→            <div x-show="paymentStep === 3" class="p-10 text-center">
+   718→   718→                <div class="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-5 animate-bounce">
+   719→   719→                    <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+   720→   720→                </div>
+   721→   721→                <h3 class="text-xl font-display font-extrabold text-navy-950 mb-3">¡Suscripción activada!</h3>
+   722→   722→
+   723→   723→                <div class="bg-slate-50 rounded-2xl p-4 mb-5 text-left space-y-2">
+   724→   724→                    <div class="flex justify-between">
+   725→   725→                        <span class="text-slate-400 font-bold uppercase text-[9px]">Plan</span>
+   726→   726→                        <span class="text-navy-950 font-bold text-xs" x-text="paymentResult.plan_name"></span>
+   727→   727→                    </div>
+   728→   728→                    <div class="flex justify-between">
+   729→   729→                        <span class="text-slate-400 font-bold uppercase text-[9px]">Inicio</span>
+   730→   730→                        <span class="text-navy-950 font-bold text-xs" x-text="paymentResult.fecha_inicio"></span>
+   731→   731→                    </div>
+   732→   732→                    <div class="flex justify-between">
+   733→   733→                        <span class="text-slate-400 font-bold uppercase text-[9px]">Vencimiento</span>
+   734→   734→                        <span class="text-navy-950 font-bold text-xs" x-text="paymentResult.fecha_vencimiento"></span>
+   735→   735→                    </div>
+   736→   736→                </div>
+   737→   737→
+   738→   738→                <p class="text-slate-500 text-xs mb-6">Plan activado exitosamente.</p>
+   739→   739→
+   740→   740→                <a href="dashboard.php" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-navy-950 text-white rounded-xl font-bold text-sm hover:bg-brand-950 transition-all active:scale-95">
+   741→   741→                    Ir al panel
+   742→   742→                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+   743→   743→                </a>
+   744→   744→            </div>
+   745→   745→        </div>
+   746→   746→    </div>
+   747→   747→
+   748→   748→    <!-- Culqi global callback -->
+   749→   749→    <script>
+   750→   750→    function culqi() {
+   751→   751→        try {
+   752→   752→            Culqi.close();
+   753→   753→        } catch (e) {}
+   754→   754→
+   755→   755→        var body = document.body;
+   756→   756→        var app = null;
+   757→   757→        try { app = Alpine.$data(body); } catch (e) {}
+   758→   758→        if (!app && body._x_dataStack) {
+   759→   759→            app = body._x_dataStack[0];
+   760→   760→        }
+   761→   761→
+   762→   762→        if (Culqi.token && Culqi.token.id) {
+   763→   763→            if (app && app.handleCulqiToken) {
+   764→   764→                app.handleCulqiToken(Culqi.token.id);
+   765→   765→            } else {
+   766→   766→                alert('Pago recibido. Redirigiendo...');
+   767→   767→                window.location.href = 'dashboard.php';
+   768→   768→            }
+   769→   769→        } else {
+   770→   770→            var msg = (Culqi.error && Culqi.error.user_message) ? Culqi.error.user_message : 'Error en el proceso de pago';
+   771→   771→            alert(msg);
+   772→   772→        }
+   773→   773→    }
+   774→   774→    </script>
+   775→   775→    <!-- AUTH MODAL -->
+   776→   776→<div 
+   777→   777→    x-cloak
+   778→   778→    :class="authModal ? 'auth-modal-shell--open' : ''"
+   779→   779→    class="auth-modal-shell fixed inset-0 z-[150] items-center justify-center p-4 lg:p-6"
+   780→   780→>
+   781→   781→    <div class="absolute inset-0 bg-navy-950/90 backdrop-blur-md" @click="authModal = false"></div>
+   782→   782→    <div 
+   783→   783→        class="auth-modal"
+   784→   784→        x-transition:enter="transition ease-out duration-300 transform"
+   785→   785→        x-transition:enter-start="scale-95 translate-y-10"
+   786→   786→        x-transition:enter-end="scale-100 translate-y-0"
+   787→   787→    >
+   788→   788→        <div class="auth-modal__hero">
+   789→   789→            <div class="auth-modal__glow"></div>
+   790→   790→            <button type="button" @click="authModal = false" class="auth-modal__close" aria-label="Cerrar formulario">
+   791→   791→                <i data-lucide="x" class="w-6 h-6"></i>
+   792→   792→            </button>
+   793→   793→            <div class="auth-modal__brand">
+   794→   794→                <img src="/logo.jpeg" alt="Logo IPF">
+   795→   795→            </div>
+   796→   796→            <span class="auth-modal__eyebrow">Instituto Pulso Fiscal</span>
+   797→   797→            <h3 class="auth-modal__title" x-text="authMode === 'login' ? 'Bienvenido nuevamente' : 'Cree su cuenta'"></h3>
+   798→   798→            <p class="auth-modal__subtitle" x-text="authMode === 'login' ? 'Acceda a sus publicaciones, cursos y beneficios.' : 'Únase a nuestra comunidad de análisis especializado.'"></p>
+   799→   799→        </div>
+   800→   800→        
+   801→   801→        <div class="auth-modal__body">
+   802→   802→            <div class="auth-mode-switch" role="tablist" aria-label="Tipo de acceso">
+   803→   803→                <button type="button" role="tab" @click="authMode = 'login'; $nextTick(() => lucide.createIcons())" :class="authMode === 'login' ? 'is-active' : ''">Iniciar sesión</button>
+   804→   804→                <button type="button" role="tab" @click="authMode = 'register'; $nextTick(() => lucide.createIcons())" :class="authMode === 'register' ? 'is-active' : ''">Registrarse</button>
+   805→   805→            </div>
+   806→   806→            <form @submit.prevent="handleAuth($event)" class="auth-form">
+   807→   807→                <div class="auth-form__fields">
+   808→   808→                    <template x-if="authMode === 'register'">
+   809→   809→                        <label class="auth-field">
+   810→   810→                            <span>Nombre completo</span>
+   811→   811→                            <div><i data-lucide="user" class="w-5 h-5"></i><input type="text" name="nombre" placeholder="Ingrese su nombre" required></div>
+   812→   812→                        </label>
+   813→   813→                    </template>
+   814→   814→                    <label class="auth-field">
+   815→   815→                        <span>Correo institucional</span>
+   816→   816→                        <div><i data-lucide="mail" class="w-5 h-5"></i><input type="email" name="email" placeholder="correo@institucion.pe" required></div>
+   817→   817→                    </label>
+   818→   818→                    <label class="auth-field">
+   819→   819→                        <span>Contraseña</span>
+   820→   820→                        <div><i data-lucide="lock" class="w-5 h-5"></i><input type="password" name="password" placeholder="Ingrese su contraseña" required></div>
+   821→   821→                    </label>
+   822→   822→                </div>
+   823→   823→                <div class="auth-form__options" x-show="authMode === 'login'">
+   824→   824→                    <label><input type="checkbox"> <span>Recordarme</span></label>
+   825→   825→                    <button type="button">¿Olvidó su contraseña?</button>
+   826→   826→                </div>
+   827→   827→                <button type="submit" class="auth-form__submit">
+   828→   828→                    <span x-text="authMode === 'login' ? 'Iniciar Sesión' : 'Registrarme'"></span>
+   829→   829→                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+   830→   830→                </button>
+   831→   831→                <p class="auth-form__toggle">
+   832→   832→                    <span x-text="authMode === 'login' ? '¿Aún no tiene cuenta?' : '¿Ya es miembro?'"></span>
+   833→   833→                    <button type="button" @click="authMode = (authMode === 'login' ? 'register' : 'login'); $nextTick(() => lucide.createIcons())" x-text="authMode === 'login' ? 'Regístrese aquí' : 'Inicie sesión'"></button>
+   834→   834→                </p>
+   835→   835→            </form>
+   836→   836→        </div>
+   837→   837→    </div>
+   838→   838→</div>
+   839→   839→
+   840→   840→        <link rel="stylesheet" href="/assets/css/chatbot-ipf.css">
+   841→   841→    <script>
+   842→   842→        window.__IPF_CHATBOT = {
+   843→   843→            apiUrl: '/chatbot-api.php',
+   844→   844→            saludo: "\u00a1Bienvenido al Instituto Pulso Fiscal! \u00bfEn qu\u00e9 puedo ayudarle?"        };
+   845→   845→    </script>
+   846→   846→    <script src="/assets/js/chatbot-ipf.js"></script>
+   847→   847→    
+   848→   848→    <script>
+   849→   849→        lucide.createIcons();
+   850→   850→    </script>
+   851→   851→</body>
+   852→   852→</html>
+   853→   853→
