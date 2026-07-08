@@ -1169,3 +1169,455 @@ html {
   opacity: 0;
   transform: translateX(40px);
 }
+
+/* ========================= */
+/* REPORTES PAGE              */
+/* ========================= */
+
+/* Filter tabs - horizontal pill navigation */
+.publication-filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.publication-filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+.publication-filter-tabs button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  border-radius: 9999px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  color: #64748b;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+.publication-filter-tabs button small {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  background: #f1f5f9;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+.publication-filter-tabs button:hover {
+  border-color: #bae2fd;
+  color: var(--color-brand-700, #03589c);
+  background: var(--color-brand-50, #f0f7ff);
+}
+.publication-filter-tabs button.is-active {
+  background: var(--color-navy-950, #020617);
+  color: white;
+  border-color: var(--color-navy-950, #020617);
+}
+.publication-filter-tabs button.is-active small {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Filter label */
+.filter-label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+}
+
+/* Report card */
+.report-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid transparent;
+}
+.report-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  border-color: #e2e8f0;
+}
+
+/* Premium badge */
+.badge-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
+}
+
+/* Pub card icons strip */
+.pub-card-icons-strip {
+  position: absolute;
+  top: 1rem;
+  right: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0.4rem;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+.pub-card-icon-mini {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  opacity: 0.3;
+  color: white;
+  transition: all 0.3s ease;
+}
+.pub-card-icon-mini.is-active {
+  opacity: 1 !important;
+  background: white !important;
+  color: var(--pub-color, #1D4ED8) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.pub-card-icon-mini svg {
+  width: 0.9rem !important;
+  height: 0.9rem !important;
+}
+
+/* Fallback cover for cards without image */
+.pub-card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: auto;
+  margin-bottom: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.pub-card-footer-logo {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.9;
+}
+.pub-card-code {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 0.35rem 0.65rem;
+  border-radius: 2px;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.05em;
+  color: white;
+}
+
+/* Responsive adjustments for filter tabs */
+@media (max-width: 768px) {
+  .publication-filter-tabs {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ================================================================ */
+/* CURSOS PAGE                                                      */
+/* ================================================================ */
+
+/* Courses Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .courses-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.25rem;
+  }
+}
+
+/* Filter Pills */
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.filter-pill-active {
+  background-color: #020617;
+  color: #ffffff;
+}
+
+.filter-pill-inactive {
+  background-color: #ffffff;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.filter-pill-inactive:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+/* Badge Variants */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge-abierto {
+  background-color: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.badge-proximo {
+  background-color: #fffbeb;
+  color: #d97706;
+  border: 1px solid #fde68a;
+}
+
+.badge-disponible {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.badge-lanzamiento {
+  background-color: #faf5ff;
+  color: #9333ea;
+  border: 1px solid #e9d5ff;
+}
+
+.badge-grabado {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+/* Course Card Premium */
+.course-card-premium {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.course-card-premium:hover {
+  border-color: #bae2fd;
+  box-shadow:
+    0 8px 32px rgba(2, 111, 193, 0.08),
+    0 2px 8px rgba(2, 111, 193, 0.04);
+  transform: translateY(-4px);
+}
+
+.course-card-premium__media {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .course-card-premium__media {
+    height: 220px;
+  }
+}
+
+.course-card-premium__media img,
+.course-card-premium__media > div:not(.course-card-premium__status):not(.course-card-premium__overlay) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.course-card-premium:hover .course-card-premium__media img,
+.course-card-premium:hover .course-card-premium__media > div:not(.course-card-premium__status):not(.course-card-premium__overlay) {
+  transform: scale(1.05);
+}
+
+.course-card-premium__status {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
+.course-card-premium__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(2, 6, 23, 0.88) 0%,
+    rgba(2, 6, 23, 0.4) 50%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem 1.25rem 1.5rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.course-card-premium:hover .course-card-premium__overlay {
+  opacity: 1;
+}
+
+.course-card-premium__kicker {
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #7cc8fb;
+  margin-bottom: 0.35rem;
+}
+
+.course-card-premium__title {
+  font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+.course-card-premium__body {
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.course-card-premium__desc {
+  font-size: 0.8rem;
+  color: #64748b;
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course-card-premium__meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 1rem;
+}
+
+.course-card-premium__label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  margin-bottom: 0.2rem;
+}
+
+.course-card-premium__value {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.course-card-premium__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.course-card-premium__price-label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  margin-bottom: 0.15rem;
+}
+
+.course-card-premium__price {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #020617;
+  font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", sans-serif;
+}
+
+.course-card-premium__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #03589c;
+  background: #f0f7ff;
+  border: 1px solid #bae2fd;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.course-card-premium__cta:hover {
+  background: #03589c;
+  color: #ffffff;
+  border-color: #03589c;
+}
