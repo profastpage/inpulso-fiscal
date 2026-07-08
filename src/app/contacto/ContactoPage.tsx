@@ -353,7 +353,7 @@ export default function ContactoPage() {
                         Dirección
                       </p>
                       <p className="text-sm text-navy-950 font-medium leading-relaxed">
-                        Lima, Perú
+                        Jr. Los Crisantemos 110, Santiago de Surco, Lima, Perú
                       </p>
                     </div>
                   </div>
@@ -368,10 +368,10 @@ export default function ContactoPage() {
                         Teléfono
                       </p>
                       <a
-                        href="tel:+51987654321"
+                        href="tel:+51943279673"
                         className="text-sm text-brand-700 font-bold hover:underline"
                       >
-                        +51 987 654 321
+                        943 279 673
                       </a>
                     </div>
                   </div>
@@ -386,16 +386,22 @@ export default function ContactoPage() {
                         Correo
                       </p>
                       <a
-                        href="mailto:contacto@inpulsofiscal.com"
+                        href="mailto:consultas@inpulsofiscal.com"
                         className="text-sm text-brand-700 font-bold hover:underline block"
                       >
-                        contacto@inpulsofiscal.com
+                        consultas@inpulsofiscal.com
                       </a>
                       <a
                         href="mailto:cursosipf@inpulsofiscal.com"
                         className="text-sm text-brand-700 font-bold hover:underline block mt-1"
                       >
                         cursosipf@inpulsofiscal.com
+                      </a>
+                      <a
+                        href="mailto:suscripcionesipf@inpulsofiscal.com"
+                        className="text-sm text-brand-700 font-bold hover:underline block mt-1"
+                      >
+                        suscripcionesipf@inpulsofiscal.com
                       </a>
                     </div>
                   </div>

@@ -26,9 +26,8 @@ const integrations = [
 ];
 
 const team = [
-  { name: "Alex Lope", role: "Director General", initials: "AL" },
-  { name: "Adrián Rodas", role: "Investigador", initials: "AR" },
-  { name: "Diana Milla", role: "Investigadora", initials: "DM" },
+  { name: "Adrián Rodas", role: "Director General", initials: "AR" },
+  { name: "Diana Milla", role: "Investigadora Senior", initials: "DM" },
   { name: "Diana Vela", role: "Investigadora", initials: "DV" },
 ];
 

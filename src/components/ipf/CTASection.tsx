@@ -48,7 +48,7 @@ export default function CTASection() {
   }, []);
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 text-center" style={{ background: "#020617" }}>
+    <section id="cta-suscripcion" ref={ref} className="py-24 lg:py-32 text-center" style={{ background: "#020617" }}>
       <div className="cta-badge-anim inline-block text-[10px] font-black tracking-[0.25em] uppercase text-brand-300 border border-brand-800 rounded-full px-4 py-1.5 mb-6">
         Oportunidad Institucional
       </div>

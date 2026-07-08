@@ -12,6 +12,8 @@ import {
   Mail,
   Lock,
   ArrowRight,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -133,12 +135,6 @@ export default function Header() {
 
           {/* Actions */}
           <div className="site-header__actions">
-            <button
-              onClick={() => setAuthOpen(true)}
-              className="site-header__login"
-            >
-              Iniciar sesión
-            </button>
             <a href="/suscripciones" className="site-header__subscribe">
               <Sparkles className="w-4 h-4 text-white" />
               Suscribirse
@@ -239,6 +235,7 @@ export default function Header() {
 /* ======================== */
 function AuthModal({ onClose }: { onClose: () => void }) {
   const [mode, setMode] = useState<"login" | "register">("login");
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <motion.div
@@ -332,9 +329,23 @@ function AuthModal({ onClose }: { onClose: () => void }) {
               </label>
               <label className="auth-field">
                 <span>Contraseña</span>
-                <div>
-                  <Lock className="w-[18px] h-[18px]" />
-                  <input type="password" name="password" placeholder="Ingrese su contraseña" required />
+                <div className="relative">
+                  <Lock className="w-[18px] h-[18px] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Ingrese su contraseña"
+                    required
+                    className="!pl-10 !pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                    aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  >
+                    {showPassword ? <EyeOff className="w-[18px] h-[18px]" /> : <Eye className="w-[18px] h-[18px]" />}
+                  </button>
                 </div>
               </label>
             </div>

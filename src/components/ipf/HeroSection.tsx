@@ -47,7 +47,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="home-hero relative overflow-hidden">
+    <section id="hero" ref={sectionRef} className="home-hero relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
