@@ -114,7 +114,7 @@ export default function HeroSection() {
           </p>
 
           <div className="home-actions hero-actions-anim mt-10 flex-col sm:flex-row">
-            <a href="#" className="btn-primary w-full sm:w-auto justify-center">
+            <a href="/suscripciones" className="btn-primary w-full sm:w-auto justify-center">
               Conoce nuestros planes <Zap className="w-5 h-5" />
             </a>
             <a

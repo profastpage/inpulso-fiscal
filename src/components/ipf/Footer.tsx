@@ -283,9 +283,23 @@ export default function Footer() {
               fontSize: 12,
               color: "rgba(255,255,255,0.3)",
               fontWeight: 600,
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              flexWrap: "wrap",
             }}
           >
-            © 2026 Instituto Pulso Fiscal. Todos los derechos reservados.
+            <span>© 2026 Instituto Pulso Fiscal. Todos los derechos reservados.</span>
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>·</span>
+            <span>Diseñado y desarrollado por{" "}</span>
+            <a
+              href="https://fastpagepro.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#0e8ce1", textDecoration: "none", fontWeight: 700 }}
+            >
+              FastPagePro
+            </a>
           </div>
           <div
             style={{
