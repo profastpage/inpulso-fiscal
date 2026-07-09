@@ -172,6 +172,45 @@ html {
   -webkit-backdrop-filter: none;
 }
 
+/* ── Light-on-dark: white text for transparent header over dark heroes (homepage) ── */
+.site-header--transparent-light .site-brand__copy strong {
+  color: #ffffff;
+}
+
+.site-header--transparent-light .site-brand__copy small {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.site-header--transparent-light .nav-link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.site-header--transparent-light .nav-link:hover,
+.site-header--transparent-light .nav-link--active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.site-header--transparent-light .site-header__toggle {
+  color: #ffffff;
+}
+
+.site-header--transparent-light .site-header__toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.site-header--transparent-light .site-header__subscribe--outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.site-header--transparent-light .site-header__subscribe--outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Legacy white variant (keep for compatibility) ── */
 .site-header--transparent .site-brand__logo--white {
   filter: brightness(0) invert(1);
 }
@@ -1458,31 +1497,31 @@ html {
 }
 
 /* ========================= */
-/* TRANSPARENT HEADER - DARK */
+/* TRANSPARENT HEADER - DARK TEXT (subpages with light hero) */
 /* ========================= */
-.site-header--transparent .site-brand__copy strong {
+.site-header--transparent:not(.site-header--transparent-light) .site-brand__copy strong {
   color: #020617;
 }
 
-.site-header--transparent .site-brand__copy small {
+.site-header--transparent:not(.site-header--transparent-light) .site-brand__copy small {
   color: #475569;
 }
 
-.site-header--transparent .nav-link {
+.site-header--transparent:not(.site-header--transparent-light) .nav-link {
   color: #334155;
 }
 
-.site-header--transparent .nav-link:hover,
-.site-header--transparent .nav-link--active {
+.site-header--transparent:not(.site-header--transparent-light) .nav-link:hover,
+.site-header--transparent:not(.site-header--transparent-light) .nav-link--active {
   color: #020617;
   background: rgba(0, 0, 0, 0.04);
 }
 
-.site-header--transparent .site-header__toggle {
+.site-header--transparent:not(.site-header--transparent-light) .site-header__toggle {
   color: #020617;
 }
 
-.site-header--transparent .site-header__toggle:hover {
+.site-header--transparent:not(.site-header--transparent-light) .site-header__toggle:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 

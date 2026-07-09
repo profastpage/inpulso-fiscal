@@ -65,7 +65,7 @@ export default function Home() {
       {homeServices.map((s) => (
         <JsonLd key={s.name} data={serviceSchema(s)} />
       ))}
-      <Header />
+      <Header transparent variant="light" />
       <main className="flex-1">
         <HeroSection />
         <ServicesSection />

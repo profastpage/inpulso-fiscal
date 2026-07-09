@@ -75,8 +75,8 @@ export default function HeroSection() {
                 backgroundSize: "60px 60px",
               }}
             />
-            {/* White overlay for text readability - left side */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent" />
+            {/* White overlay for text readability — starts below header (72px) */}
+            <div className="absolute top-[72px] inset-x-0 bottom-0 bg-gradient-to-r from-white via-white/90 to-transparent" />
           </motion.div>
         </AnimatePresence>
       </div>

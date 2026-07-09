@@ -46,9 +46,11 @@ const serviceLinks = [
 
 interface HeaderProps {
   transparent?: boolean;
+  /** "dark" = dark text on light bg (subpages), "light" = white text on dark bg (homepage) */
+  variant?: "dark" | "light";
 }
 
-export default function Header({ transparent = false }: HeaderProps) {
+export default function Header({ transparent = false, variant = "dark" }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -74,11 +76,12 @@ export default function Header({ transparent = false }: HeaderProps) {
   }, [mobileOpen]);
 
   const isTransparent = transparent && !scrolled;
+  const isLightOnDark = isTransparent && variant === "light";
 
   return (
     <>
       <header
-        className={`site-header ${scrolled ? "site-header--scrolled" : ""} ${isTransparent ? "site-header--transparent" : ""}`}
+        className={`site-header ${scrolled ? "site-header--scrolled" : ""} ${isTransparent ? "site-header--transparent" : ""} ${isLightOnDark ? "site-header--transparent-light" : ""}`}
       >
         <div className="site-header__inner">
           {/* Brand */}
@@ -150,16 +153,16 @@ export default function Header({ transparent = false }: HeaderProps) {
           </nav>
 
           {/* Actions */}
-          <div className="site-header__actions">
-            <a href="/suscripciones" className="site-header__subscribe">
-              <Sparkles className="w-4 h-4 text-white" />
+          <div className={`site-header__actions ${isLightOnDark ? "site-header__actions--light" : ""}`}>
+            <a href="/suscripciones" className={`site-header__subscribe ${isLightOnDark ? "site-header__subscribe--outline" : ""}`}>
+              <Sparkles className={`w-4 h-4 ${isLightOnDark ? "text-white" : "text-white"}`} />
               Suscribirse
             </a>
           </div>
 
           {/* Mobile Toggle */}
           <button
-            className="site-header__toggle"
+            className={`site-header__toggle ${isLightOnDark ? "site-header__toggle--light" : ""}`}
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menú"
