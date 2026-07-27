@@ -122,7 +122,7 @@ const SECTIONS = [
 ];
 const sectionIds = SECTIONS.map((s) => s.id);
 
-const CULQI_PUBLIC_KEY = process.env.NEXT_PUBLIC_CULQI_PUBLIC_KEY || "";
+const CULQI_PUBLIC_KEY = "pk_live_O3HVawHs1fTessM1";
 const CULQI_JS_URL = "https://checkout.culqi.com/js/v4";
 
 /* ======================== */
