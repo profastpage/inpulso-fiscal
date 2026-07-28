@@ -10,6 +10,7 @@ import Section from "@/components/ipf/Section";
 import SectionNav from "@/components/ipf/SectionNav";
 import { useSectionDeepLink } from "@/hooks/useSectionDeepLink";
 import { reports, categoryConfig, type Report } from "@/data/publications";
+import { useSubscription } from "@/hooks/useSubscription";
 
 /* ================================ */
 /* TYPES                              */
@@ -138,8 +139,10 @@ function IconSvg({ name, size = 14, className = "" }: { name: string; size?: num
 /* ================================ */
 
 function PublicationCard({ report, index }: { report: Report; index: number }) {
+  const { isSubscribed } = useSubscription();
   const catConf = categoryConfig.find((c) => c.name === report.category);
   const hasCover = !!report.cover;
+  const showLock = report.isPremium && !isSubscribed;
 
   return (
     <motion.article
@@ -199,7 +202,7 @@ function PublicationCard({ report, index }: { report: Report; index: number }) {
         </div>
 
         {/* Premium badge */}
-        <div className="absolute top-4 left-4">
+        <div className="absolute top-4 left-4 z-10">
           {report.isPremium && (
             <span className="badge-premium">
               <IconSvg name="crown" size={12} />
@@ -207,6 +210,15 @@ function PublicationCard({ report, index }: { report: Report; index: number }) {
             </span>
           )}
         </div>
+
+        {/* Lock overlay for non-subscribers */}
+        {showLock && (
+          <div className="absolute inset-0 bg-white/50 backdrop-blur-[2px] z-10 flex items-center justify-center">
+            <div className="w-14 h-14 rounded-full bg-white shadow-xl flex items-center justify-center">
+              <IconSvg name="lock" size={24} className="text-brand-700" />
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Info */}
@@ -236,7 +248,14 @@ function PublicationCard({ report, index }: { report: Report; index: number }) {
             className="text-[10px] font-black uppercase tracking-[0.2em] hover:underline flex items-center gap-1.5"
             style={{ color: report.config.color }}
           >
-            VER DOCUMENTO »
+            {showLock ? (
+              <>
+                <IconSvg name="lock" size={12} />
+                COMPRAR PARA DESBLOQUEAR »
+              </>
+            ) : (
+              <>VER DOCUMENTO »</>
+            )}
           </a>
         </div>
       </div>
