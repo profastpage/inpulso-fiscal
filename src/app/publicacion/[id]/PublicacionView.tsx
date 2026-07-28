@@ -50,8 +50,8 @@ export default function PublicacionView({ id }: { id: string }) {
   }
 
   const catConf = categoryConfig.find((c) => c.name === report.category);
-  const isLocked = report.isPremium && !isSubscribed;
-  const isBasicLocked = report.isPremium && isSubscribed && !canDownload;
+  const isLocked = !isSubscribed;
+  const isBasicLocked = isSubscribed && !canDownload;
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">

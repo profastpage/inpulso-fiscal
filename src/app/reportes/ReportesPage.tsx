@@ -142,7 +142,7 @@ function PublicationCard({ report, index }: { report: Report; index: number }) {
   const { isSubscribed } = useSubscription();
   const catConf = categoryConfig.find((c) => c.name === report.category);
   const hasCover = !!report.cover;
-  const showLock = report.isPremium && !isSubscribed;
+  const showLock = !isSubscribed;
 
   return (
     <motion.article
