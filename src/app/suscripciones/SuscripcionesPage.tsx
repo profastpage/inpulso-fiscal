@@ -226,6 +226,22 @@ export default function SuscripcionesPage() {
           fecha_vencimiento: endDate.toLocaleDateString("es-PE"),
           subscription_id: data.subscription_id || "",
         });
+
+        // Guardar plan en localStorage para control de acceso a documentos
+        try {
+          const planType = selectedPlan.category === "premium" ? "premium" : "basico";
+          localStorage.setItem(
+            "ipf_subscription",
+            JSON.stringify({
+              plan: planType,
+              planName: `${selectedPlan.kicker} ${selectedPlan.name}`,
+              subscriptionId: data.subscription_id || "",
+              activatedAt: now.toISOString(),
+              expiresAt: endDate.toISOString(),
+            })
+          );
+        } catch {}
+
         setPaymentStep(3); // Success
       } catch {
         setPaymentError("Error de conexion. Intenta de nuevo.");

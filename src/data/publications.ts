@@ -1,0 +1,266 @@
+/* ================================================================ */
+/* PUBLICACIONES COMPARTIDAS                                         */
+/* Este archivo se importa tanto en ReportesPage como en PublicacionView */
+/* ================================================================ */
+
+export interface Report {
+  id: number;
+  title: string;
+  publicationType: string;
+  category: string;
+  date: string;
+  year: string;
+  description: string;
+  isPremium: boolean;
+  cover: string;
+  url: string;
+  config: {
+    icon: string;
+    color: string;
+    bg_light: string;
+    text_color: string;
+  };
+}
+
+export const categoryConfig = [
+  { name: "Macroeconomía", icon: "trending-up", color: "#1D4ED8", bg: "blue" },
+  { name: "Política Fiscal", icon: "landmark", color: "#B45309", bg: "amber" },
+  { name: "Sectores Económicos", icon: "factory", color: "#047857", bg: "emerald" },
+  { name: "Mercados", icon: "bar-chart-2", color: "#0E7490", bg: "cyan" },
+  { name: "Presupuesto Público", icon: "layout-grid", color: "#C2410C", bg: "orange" },
+  { name: "Sistemas Administrativos", icon: "settings-2", color: "#6D28D9", bg: "violet" },
+  { name: "Inversión Pública", icon: "building-2", color: "#0F766E", bg: "teal" },
+  { name: "Gestión Pública", icon: "clipboard-check", color: "#1E40AF", bg: "blue" },
+  { name: "Políticas Públicas", icon: "scale", color: "#7C3AED", bg: "violet" },
+  { name: "Desafíos Sociales", icon: "users", color: "#BE185D", bg: "pink" },
+];
+
+export const reports: Report[] = [
+  /* ===== NUEVOS DOCUMENTOS REALES (Jul 2026) ===== */
+  {
+    id: 30,
+    title: "Guía para Modificaciones Presupuestarias",
+    publicationType: "Guías de Estudio",
+    category: "Presupuesto Público",
+    date: "25 Jul 2026",
+    year: "2026",
+    description: "Guía técnica completa sobre el proceso de modificaciones presupuestarias en el Perú, incluyendo Créditos Suplementarios, Habilitaciones y Transferencias de Partidas.",
+    isPremium: false,
+    cover: "",
+    url: "/documentos/guia-modificaciones-presupuestarias.pdf",
+    config: { icon: "book-open", color: "#6D28D9", bg_light: "bg-violet-50", text_color: "text-violet-700" },
+  },
+  {
+    id: 31,
+    title: "Reporte Mensual de Inflación — Marzo 2026",
+    publicationType: "Reportes periódicos",
+    category: "Macroeconomía",
+    date: "01 Abr 2026",
+    year: "2026",
+    description: "Análisis detallado de la evolución de la inflación en Perú durante marzo 2026, incluyendo desglose por componentes y comparación regional.",
+    isPremium: true,
+    cover: "",
+    url: "/documentos/reporte-inflacion-marzo-2026.pdf",
+    config: { icon: "trending-up", color: "#1D4ED8", bg_light: "bg-blue-50", text_color: "text-blue-700" },
+  },
+  /* ===== DOCUMENTOS EXISTENTES ===== */
+  {
+    id: 22,
+    title: "Publicacion de Prueba (Gratuita)",
+    publicationType: "Artículos",
+    category: "Macroeconomía",
+    date: "02 Jul 2026",
+    year: "2026",
+    description: "Descripción Corta (Resumen) de Publicacion de Prueba (Gratuita)",
+    isPremium: false,
+    cover: "/assets/img/1783014957_c74c4821.jpeg",
+    url: "/assets/pdf/1783014957_1f74c0b7.pdf",
+    config: { icon: "trending-up", color: "#1D4ED8", bg_light: "bg-blue-50", text_color: "text-blue-700" },
+  },
+  {
+    id: 23,
+    title: "Publicacion de Prueba (Exclusiva - Estandar)",
+    publicationType: "Artículos",
+    category: "Macroeconomía",
+    date: "02 Jul 2026",
+    year: "2026",
+    description: "Descripción Corta (Resumen) de Publicacion de Prueba (Exclusiva - Estandar)",
+    isPremium: true,
+    cover: "/assets/img/1783014978_fac66600.jpeg",
+    url: "/assets/pdf/1783014978_b877bdba.pdf",
+    config: { icon: "trending-up", color: "#1D4ED8", bg_light: "bg-blue-50", text_color: "text-blue-700" },
+  },
+  {
+    id: 24,
+    title: "Publicacion de Prueba (Exclusiva - Premium)",
+    publicationType: "Artículos",
+    category: "Macroeconomía",
+    date: "02 Jul 2026",
+    year: "2026",
+    description: "Descripción Corta (Resumen)\nPublicacion de Prueba (Exclusiva - Premium)",
+    isPremium: true,
+    cover: "/assets/img/1783015006_b821c56b.jpeg",
+    url: "/assets/pdf/1783015006_77c2e242.pdf",
+    config: { icon: "trending-up", color: "#1D4ED8", bg_light: "bg-blue-50", text_color: "text-blue-700" },
+  },
+  {
+    id: 21,
+    title: "REPORTE MENSUAL DE PRODUCCIÓN NACIONAL",
+    publicationType: "Reportes periódicos",
+    category: "Macroeconomía",
+    date: "01 Jul 2026",
+    year: "2026",
+    description: "El presente reporte analiza la producción nacional en el Perú a marzo de 2026.",
+    isPremium: true,
+    cover: "/assets/img/1782947717_61364768.png",
+    url: "/assets/pdf/1782947717_3fe99d5d.pdf",
+    config: { icon: "trending-up", color: "#1D4ED8", bg_light: "bg-blue-50", text_color: "text-blue-700" },
+  },
+  {
+    id: 4,
+    title: "Semana Fiscal — Edición 22, Junio 2026",
+    publicationType: "Informes",
+    category: "Política Fiscal",
+    date: "02 Jun 2026",
+    year: "2026",
+    description: "Boletín semanal con las principales novedades tributarias, resoluciones SUNAT y modificaciones normativas.",
+    isPremium: true,
+    cover: "/assets/img/publicaciones/semana-fiscal-22.jpg",
+    url: "/assets/pdf/semana-fiscal-22-junio-2026.pdf",
+    config: { icon: "landmark", color: "#B45309", bg_light: "bg-amber-50", text_color: "text-amber-700" },
+  },
+  {
+    id: 8,
+    title: "Reforma del Sistema Pensionario Peruano: Implicancias Fiscales",
+    publicationType: "Reportes periódicos",
+    category: "Política Fiscal",
+    date: "28 Abr 2026",
+    year: "2026",
+    description: "Análisis del impacto fiscal de las propuestas de reforma al sistema de pensiones en debate en el Congreso.",
+    isPremium: true,
+    cover: "/assets/img/publicaciones/reforma-pensionaria.jpg",
+    url: "/assets/pdf/reforma-pensionaria-implicancias-fiscales.pdf",
+    config: { icon: "landmark", color: "#B45309", bg_light: "bg-amber-50", text_color: "text-amber-700" },
+  },
+  {
+    id: 1,
+    title: "Panorama Económico del Perú: Primer Trimestre 2026",
+    publicationType: "Reportes periódicos",
+    category: "Macroeconomía",
+    date: "15 Abr 2026",
+    year: "2026",
+    description: "Análisis del comportamiento del PBI, inflación y tipo de cambio durante el primer trimestre del año.",
+    isPremium: false,
+    cover: "/assets/img/publicaciones/panorama-economico-q1-2026.jpg",
+    url: "/assets/pdf/panorama-economico-q1-2026.pdf",
+    config: { icon: "trending-up", color: "#1D4ED8", bg_light: "bg-blue-50", text_color: "text-blue-700" },
+  },
+  {
+    id: 9,
+    title: "Investigación Especial: Evasión Tributaria en el Perú 2025",
+    publicationType: "Reportes periódicos",
+    category: "Política Fiscal",
+    date: "05 Abr 2026",
+    year: "2026",
+    description: "Estudio profundo sobre los mecanismos de evasión fiscal más frecuentes y su impacto en la recaudación.",
+    isPremium: true,
+    cover: "/assets/img/publicaciones/evasion-tributaria-2025.jpg",
+    url: "/assets/pdf/evasion-tributaria-peru-2025.pdf",
+    config: { icon: "landmark", color: "#B45309", bg_light: "bg-amber-50", text_color: "text-amber-700" },
+  },
+  {
+    id: 10,
+    title: "Competitividad Regional: Índice de Gestión Fiscal Subnacional 2025",
+    publicationType: "Reportes periódicos",
+    category: "Política Fiscal",
+    date: "20 Mar 2026",
+    year: "2026",
+    description: "Ranking de los 25 gobiernos regionales según su eficiencia en ejecución presupuestal y gestión de recursos.",
+    isPremium: true,
+    cover: "/assets/img/publicaciones/competitividad-regional-2025.jpg",
+    url: "/assets/pdf/competitividad-regional-2025.pdf",
+    config: { icon: "landmark", color: "#B45309", bg_light: "bg-amber-50", text_color: "text-amber-700" },
+  },
+  {
+    id: 17,
+    title: "Perspectivas Económicas Peru 2024-2025",
+    publicationType: "Reportes periódicos",
+    category: "Macroeconomía",
+    date: "02 May 2024",
+    year: "2024",
+    description: "Proyecciones macroeconómicas para el bienio 2024-2025.",
+    isPremium: true,
+    cover: "",
+    url: "/uploads/pdfs/perspectivas-2024-2025.pdf",
+    config: { icon: "trending-up", color: "#1D4ED8", bg_light: "bg-blue-50", text_color: "text-blue-700" },
+  },
+  {
+    id: 20,
+    title: "Análisis Comparativo: Sistemas Fiscales Andinos",
+    publicationType: "Investigaciones",
+    category: "Política Fiscal",
+    date: "25 Abr 2024",
+    year: "2024",
+    description: "Estudio comparado de los sistemas tributarios de Chile, Colombia y Perú.",
+    isPremium: true,
+    cover: "",
+    url: "/uploads/pdfs/comparativo-fiscal-andino.pdf",
+    config: { icon: "landmark", color: "#B45309", bg_light: "bg-amber-50", text_color: "text-amber-700" },
+  },
+  {
+    id: 16,
+    title: "Impacto de la Reforma Tributaria en las MYPE Peruanas",
+    publicationType: "Investigaciones",
+    category: "Política Fiscal",
+    date: "18 Abr 2024",
+    year: "2024",
+    description: "Investigación sobre los efectos de los cambios en el Régimen MYPE Tributario.",
+    isPremium: true,
+    cover: "",
+    url: "/uploads/pdfs/reforma-tributaria-mype.pdf",
+    config: { icon: "landmark", color: "#B45309", bg_light: "bg-amber-50", text_color: "text-amber-700" },
+  },
+  {
+    id: 14,
+    title: "Reporte Fiscal Peru Q1 2024: Recaudación y Perspectivas",
+    publicationType: "Reportes periódicos",
+    category: "Macroeconomía",
+    date: "05 Abr 2024",
+    year: "2024",
+    description: "Análisis detallado de la recaudación tributaria del primer trimestre 2024.",
+    isPremium: true,
+    cover: "",
+    url: "/uploads/pdfs/reporte-fiscal-q1-2024.pdf",
+    config: { icon: "trending-up", color: "#1D4ED8", bg_light: "bg-blue-50", text_color: "text-blue-700" },
+  },
+  {
+    id: 15,
+    title: "Análisis del Presupuesto General de la República 2024",
+    publicationType: "Informes",
+    category: "Presupuesto Público",
+    date: "28 Mar 2024",
+    year: "2024",
+    description: "Examen exhaustivo de la estructura del presupuesto nacional 2024.",
+    isPremium: true,
+    cover: "",
+    url: "/uploads/pdfs/presupuesto-2024.pdf",
+    config: { icon: "layout-grid", color: "#C2410C", bg_light: "bg-orange-50", text_color: "text-orange-700" },
+  },
+  {
+    id: 11,
+    title: "El Sistema Tributario Peruano: Visión General 2024",
+    publicationType: "Artículos",
+    category: "Política Fiscal",
+    date: "15 Mar 2024",
+    year: "2024",
+    description: "Un panorama completo del sistema tributario del Perú.",
+    isPremium: false,
+    cover: "",
+    url: "/assets/pdf/sistema-tributario-2024.pdf",
+    config: { icon: "landmark", color: "#B45309", bg_light: "bg-amber-50", text_color: "text-amber-700" },
+  },
+];
+
+export function getReportById(id: number | string): Report | undefined {
+  return reports.find((r) => r.id === Number(id));
+}
