@@ -133,7 +133,7 @@ export default function PublicacionView({ id }: { id: string }) {
           {/* Lock Overlay - solo para docs premium sin suscripcion */}
           {isLocked && (
             <div className="absolute inset-0 z-20 flex items-center justify-center">
-              {/* Blur backdrop */
+              {/* Blur backdrop */}
               <div className="absolute inset-0 backdrop-blur-lg bg-white/40" />
               
               {/* Lock card */}
