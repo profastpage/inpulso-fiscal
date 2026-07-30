@@ -490,7 +490,7 @@ export default function SuscripcionesPage() {
               </p>
             </div>
 
-            {/* Documentos con candado - preview para suscriptores */}
+                        {/* Documentos con preview de primeras paginas + candado */}
             <div className="mt-20">
               <div className="text-center mb-10">
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-100 rounded-full text-xs font-bold text-brand-700 uppercase tracking-wider mb-4">
@@ -501,49 +501,64 @@ export default function SuscripcionesPage() {
                   Documentos incluidos en tu suscripción
                 </h2>
                 <p className="text-slate-400 text-sm mt-3 max-w-lg mx-auto">
-                  Accede a reportes, informes, guías e investigaciones sobre economía, política fiscal y gestión pública en el Perú.
+                  Vista previa de las primeras 3 páginas. Suscríbete para acceder al documento completo.
                 </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {reports.slice(0, 8).map((doc, i) => (
                   <motion.div
                     key={doc.id}
-                    className="relative group rounded-2xl overflow-hidden"
+                    className="relative group rounded-2xl overflow-hidden bg-white shadow-lg"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: i * 0.07 }}
                   >
-                    {/* Card background */}
-                    <div
-                      className="aspect-[3/4] p-5 flex flex-col justify-between"
-                      style={{ background: `linear-gradient(135deg, ${doc.config.color}dd, ${doc.config.color}99)` }}
-                    >
-                      <div>
-                        <span className="text-[9px] font-black uppercase tracking-wider text-white/60">
-                          {doc.publicationType}
-                        </span>
-                        <h3 className="text-sm font-bold text-white mt-2 leading-snug line-clamp-3">
-                          {doc.title}
-                        </h3>
+                    {/* Document title bar */}
+                    <div className="px-4 py-3 bg-navy-950 flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full" style={{ background: doc.config.color }} />
+                      <h3 className="text-[11px] font-bold text-white truncate flex-1">
+                        {doc.title}
+                      </h3>
+                    </div>
+
+                    {/* PDF Pages Preview */}
+                    <div className="relative bg-slate-100">
+                      <div className="relative aspect-[3/4] overflow-hidden">
+                        <img
+                          src={`/previews/${doc.id}/page-1.jpg`}
+                          alt={doc.title}
+                          className="w-full h-full object-cover object-top"
+                          loading="lazy"
+                        />
+
+                        {/* Page indicator */}
+                        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                          <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                            Página 1 de {doc.id === 30 ? '26' : doc.id === 31 ? '8' : '?'}
+                          </span>
+                          <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                            {doc.publicationType}
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] text-white/50">{doc.date}</span>
-                        <span className="text-[10px] font-bold text-white/70 px-2 py-0.5 rounded-full border border-white/20">
-                          {doc.category}
-                        </span>
+
+                      {/* Locked pages overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-950/90 via-navy-950/70 to-navy-950/30 flex flex-col items-center justify-center pb-8 pt-16">
+                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-3">
+                          <Lock className="w-5 h-5 text-white" />
+                        </div>
+                        <p className="text-white font-bold text-xs">Páginas 2 en adelante</p>
+                        <p className="text-white/50 text-[10px] mt-1">bloqueadas</p>
                       </div>
                     </div>
 
-                    {/* Lock overlay */}
-                    <div className="absolute inset-0 bg-navy-950/50 backdrop-blur-[3px] flex items-center justify-center group-hover:bg-navy-950/60 transition-colors">
-                      <div className="text-center">
-                        <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-3">
-                          <Lock className="w-6 h-6 text-white" />
-                        </div>
-                        <p className="text-white font-bold text-xs">Bloqueado</p>
-                        <p className="text-white/50 text-[10px] mt-1">Suscríbete para acceder</p>
-                      </div>
+                    {/* Bottom info bar */}
+                    <div className="px-4 py-2.5 bg-white border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-[10px] text-slate-400">{doc.date}</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ color: doc.config.color, background: `${doc.config.color}15` }}>
+                        {doc.category}
+                      </span>
                     </div>
                   </motion.div>
                 ))}
@@ -559,6 +574,8 @@ export default function SuscripcionesPage() {
                 </a>
               </div>
             </div>
+
+
           </div>
         </main>
 
