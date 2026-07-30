@@ -364,25 +364,14 @@ export default function SuscripcionesPage() {
           <div className="pricing-premium__bg pricing-premium__bg--glow-br" />
           <div className="pricing-premium__container">
             <header className="pricing-premium__header">
-              {/* Banner de Oferta */}
-              <div className="mb-10 p-4 bg-amber-100 border border-amber-200 rounded-2xl text-center shadow-sm">
+              <div className="mb-8 p-4 bg-amber-100 border border-amber-200 rounded-2xl text-center shadow-sm">
                 <span className="text-sm font-bold text-amber-900 flex items-center justify-center gap-2">
                   Precios de oferta especial por lanzamiento de la página
                 </span>
               </div>
+            </header>
 
-              <span className="pricing-premium__pill">
-                Niveles de Acceso Técnico
-              </span>
-              <h1 className="pricing-premium__title">
-                Invierta en su{" "}
-                <span className="pricing-premium__title-accent">
-                  Visión Estratégica
-                </span>
-              </h1>
-              <div className="mb-10" />
-
-            {/* ========== CONTENIDO EXCLUSIVO - DOCUMENTOS PREVIEW ========== */}
+            {/* ========== CONTENIDO EXCLUSIVO ========== */}
             <div className="mb-20">
               <div className="text-center mb-10">
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-100 rounded-full text-xs font-bold text-brand-700 uppercase tracking-wider mb-4">
@@ -411,29 +400,17 @@ export default function SuscripcionesPage() {
                     >
                       <div className="px-4 py-3 bg-navy-950 flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full" style={{ background: doc.config.color }} />
-                        <h3 className="text-[11px] font-bold text-white truncate flex-1">
-                          {doc.title}
-                        </h3>
+                        <h3 className="text-[11px] font-bold text-white truncate flex-1">{doc.title}</h3>
                       </div>
 
                       <div className="relative bg-slate-100">
                         <div className="relative aspect-[3/4] overflow-hidden">
-                          <img
-                            src={`/previews/${doc.id}/page-1.jpg`}
-                            alt={doc.title}
-                            className="w-full h-full object-cover object-top"
-                            loading="lazy"
-                          />
+                          <img src={`/previews/${doc.id}/page-1.jpg`} alt={doc.title} className="w-full h-full object-cover object-top" loading="lazy" />
                           <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                            <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                              2 de {totalPages || '?'} páginas visibles
-                            </span>
-                            <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                              {doc.publicationType}
-                            </span>
+                            <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">2 de {totalPages || "?"} páginas visibles</span>
+                            <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">{doc.publicationType}</span>
                           </div>
                         </div>
-
                         <div className="absolute inset-0 bg-navy-950/0 group-hover:bg-navy-950/30 transition-colors flex items-center justify-center">
                           <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white rounded-xl shadow-xl px-4 py-2.5 flex items-center gap-2">
                             <Eye className="w-4 h-4 text-brand-700" />
@@ -444,9 +421,7 @@ export default function SuscripcionesPage() {
 
                       <div className="px-4 py-2.5 bg-white border-t border-slate-100 flex items-center justify-between">
                         <span className="text-[10px] text-slate-400">{doc.date}</span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ color: doc.config.color, background: `${doc.config.color}15` }}>
-                          {doc.category}
-                        </span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ color: doc.config.color, background: `${doc.config.color}15` }}>{doc.category}</span>
                       </div>
                     </motion.div>
                   );
@@ -454,25 +429,16 @@ export default function SuscripcionesPage() {
               </div>
 
               <div className="text-center mt-8">
-                <a
-                  href="/reportes"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-brand-400 hover:text-brand-300 transition-colors"
-                >
-                  Ver todas las publicaciones
-                  <ArrowRight className="w-4 h-4" />
+                <a href="/reportes" className="inline-flex items-center gap-2 text-sm font-bold text-brand-400 hover:text-brand-300 transition-colors">
+                  Ver todas las publicaciones <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
 
             {/* ========== PLANES DE SUSCRIPCION ========== */}
-            <span className="pricing-premium__pill">
-              Niveles de Acceso Técnico
-            </span>
+            <span className="pricing-premium__pill">Niveles de Acceso Técnico</span>
             <h2 className="text-3xl font-display font-extrabold text-white mt-4 text-center">
-              Invierta en su{" "}
-              <span className="pricing-premium__title-accent">
-                Visión Estratégica
-              </span>
+              Invierta en su <span className="pricing-premium__title-accent">Visión Estratégica</span>
             </h2>
             <div className="mb-10" />
 
@@ -481,114 +447,138 @@ export default function SuscripcionesPage() {
               {plans.map((p, i) => {
                 const IconComp = p.icon;
                 return (
-                  <motion.article
-                    key={p.id}
-                    className={`plan-card-v4 ${
-                      p.recommended ? "plan-card-v4--recommended" : ""
-                    } ${p.category === "premium" ? "plan-card-v4--premium" : ""}`}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                  >
-                    {p.badge && (
-                      <span
-                        className={`plan-card-v4__badge ${
-                          p.badgeType === "recommended"
-                            ? "plan-card-v4__badge--recommended"
-                            : "plan-card-v4__badge--promo"
-                        }`}
-                      >
-                        {p.badge}
-                      </span>
-                    )}
-
+                  <motion.article key={p.id} className={`plan-card-v4 \${p.recommended ? "plan-card-v4--recommended" : ""} \${p.category === "premium" ? "plan-card-v4--premium" : ""}`} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }}>
+                    {p.badge && <span className={`plan-card-v4__badge \${p.badgeType === "recommended" ? "plan-card-v4__badge--recommended" : "plan-card-v4__badge--promo"}`}>{p.badge}</span>}
                     <PlanIcon icon={IconComp} category={p.category} />
-
                     <div className="plan-card-v4__content">
-                      <p
-                        className={`plan-card-v4__category ${
-                          p.category === "premium"
-                            ? "plan-card-v4__category--premium"
-                            : "plan-card-v4__category--basic"
-                        }`}
-                      >
-                        {p.kicker}
-                      </p>
+                      <p className={`plan-card-v4__category \${p.category === "premium" ? "plan-card-v4__category--premium" : "plan-card-v4__category--basic"}`}>{p.kicker}</p>
                       <h3 className="plan-card-v4__name">{p.name}</h3>
-                      <p className="plan-card-v4__description">
-                        {p.description}
-                      </p>
+                      <p className="plan-card-v4__description">{p.description}</p>
                     </div>
-
-                    <div className="plan-card-v4__price">
-                      <div className="plan-card-v4__price-main">
-                        <span className="plan-card-v4__price-symbol">S/</span>
-                        <span className="plan-card-v4__price-amount">
-                          {p.amount}
-                        </span>
-                        <span className="plan-card-v4__price-decimal">
-                          {p.decimal}
-                        </span>
-                        <span className="text-lg font-bold ml-1 opacity-50">
-                          /{p.period.includes("año") ? "año" : "mes"}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="plan-card-v4__features">
-                      {p.features.map((f, fi) => {
-                        const FIcon = f.icon;
-                        return (
-                          <div key={fi} className="plan-card-v4__feature">
-                            <FIcon className="w-4 h-4 text-emerald-500" />
-                            <span>{f.text}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    <button
-                      onClick={() => handleSubscribe(p)}
-                      className={`plan-card-v4__cta ${
-                        p.category === "premium"
-                          ? "plan-card-v4__cta--premium"
-                          : "plan-card-v4__cta--primary"
-                      }`}
-                    >
-                      Suscribirse
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
+                    <div className="plan-card-v4__price"><div className="plan-card-v4__price-main">
+                      <span className="plan-card-v4__price-symbol">S/</span>
+                      <span className="plan-card-v4__price-amount">{p.amount}</span>
+                      <span className="plan-card-v4__price-decimal">{p.decimal}</span>
+                      <span className="text-lg font-bold ml-1 opacity-50">/{p.period.includes("año") ? "año" : "mes"}</span>
+                    </div></div>
+                    <div className="plan-card-v4__features">{p.features.map((f, fi) => { const FIcon = f.icon; return (<div key={fi} className="plan-card-v4__feature"><FIcon className="w-4 h-4 text-emerald-500" /><span>{f.text}</span></div>); })}</div>
+                    <button onClick={() => handleSubscribe(p)} className={`plan-card-v4__cta \${p.category === "premium" ? "plan-card-v4__cta--premium" : "plan-card-v4__cta--primary"}`}>Suscribirse <ArrowRight className="w-4 h-4" /></button>
                   </motion.article>
                 );
               })}
             </div>
             </Section>
 
-            {/* Planes Corporativos */}
             <div className="mt-12 text-center">
               <p className="text-slate-500 text-base">
                 ¿Tienes un equipo de 5 personas o más? Consulta por{" "}
-                <a
-                  href="mailto:consultas@inpulsofiscal.com"
-                  className="text-brand-600 font-bold hover:underline"
-                >
-                  planes corporativos
-                </a>{" "}
+                <a href="mailto:consultas@inpulsofiscal.com" className="text-brand-600 font-bold hover:underline">planes corporativos</a>{" "}
                 escribiendo a{" "}
-                <a
-                  href="mailto:consultas@inpulsofiscal.com"
-                  className="text-brand-600 font-bold hover:underline"
-                >
-                  consultas@inpulsofiscal.com
-                </a>
+                <a href="mailto:consultas@inpulsofiscal.com" className="text-brand-600 font-bold hover:underline">consultas@inpulsofiscal.com</a>
               </p>
             </div>
-
 </main>
 
         <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
         <Footer />
         <WhatsAppButton />
+
+        {/* ======================== */}
+        {/* DOCUMENT PREVIEW MODAL   */}
+        {/* ======================== */}
+        <AnimatePresence>
+          {previewDoc && (
+            <motion.div
+              className="fixed inset-0 z-[120] flex items-center justify-center p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                onClick={() => setPreviewDoc(null)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              />
+
+              <motion.div
+                className="relative bg-white w-full max-w-2xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+                initial={{ scale: 0.95, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.95, y: 20 }}
+                transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal header */}
+                <div className="px-5 py-4 bg-navy-950 flex items-center justify-between flex-shrink-0">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: previewDoc.config.color }} />
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-bold text-white truncate">{previewDoc.title}</h3>
+                      <p className="text-[10px] text-slate-400">{previewDoc.publicationType} · {previewDoc.date}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setPreviewDoc(null)}
+                    className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
+                  >
+                    <X className="w-5 h-5 text-slate-400" />
+                  </button>
+                </div>
+
+                {/* Scrollable pages */}
+                <div className="overflow-y-auto flex-1 bg-slate-100">
+                  {/* Page 1 - fully visible */}
+                  <div className="p-4 pb-2">
+                    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                      <img
+                        src={`/previews/${previewDoc.id}/page-1.jpg`}
+                        alt="Página 1"
+                        className="w-full h-auto"
+                      />
+                    </div>
+                    <p className="text-center text-[10px] font-bold text-slate-400 mt-2">Página 1</p>
+                  </div>
+
+                  {/* Page 2 - fully visible */}
+                  <div className="p-4 pb-2">
+                    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                      <img
+                        src={`/previews/${previewDoc.id}/page-2.jpg`}
+                        alt="Página 2"
+                        className="w-full h-auto"
+                      />
+                    </div>
+                    <p className="text-center text-[10px] font-bold text-slate-400 mt-2">Página 2</p>
+                  </div>
+
+                  {/* Pages 3+ - LOCKED */}
+                  <div className="px-4 pb-6">
+                    <div className="relative bg-navy-950 rounded-xl overflow-hidden py-16 flex flex-col items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mb-4">
+                        <Lock className="w-7 h-7 text-white" />
+                      </div>
+                      <h4 className="text-white font-bold text-base mb-1">Documento bloqueado</h4>
+                      <p className="text-white/50 text-sm mb-6 text-center px-8">
+                        Las páginas restantes están disponibles con una suscripción activa.
+                      </p>
+                      <a
+                        href="#planes"
+                        onClick={() => { setPreviewDoc(null); }}
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-brand-700 hover:bg-brand-800 text-white rounded-xl font-bold text-sm transition-all active:scale-[0.98]"
+                      >
+                        Ver planes de suscripción
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* ======================== */}
         {/* PAYMENT MODAL            */}
