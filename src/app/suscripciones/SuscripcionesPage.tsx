@@ -24,6 +24,7 @@ import WhatsAppButton from "@/components/ipf/WhatsAppButton";
 import Section from "@/components/ipf/Section";
 import SectionNav from "@/components/ipf/SectionNav";
 import { useSectionDeepLink } from "@/hooks/useSectionDeepLink";
+import { reports } from "@/data/publications";
 
 /* ======================== */
 /* PLAN DATA                 */
@@ -487,6 +488,76 @@ export default function SuscripcionesPage() {
                   consultas@inpulsofiscal.com
                 </a>
               </p>
+            </div>
+
+            {/* Documentos con candado - preview para suscriptores */}
+            <div className="mt-20">
+              <div className="text-center mb-10">
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-100 rounded-full text-xs font-bold text-brand-700 uppercase tracking-wider mb-4">
+                  <Lock className="w-3.5 h-3.5" />
+                  Contenido exclusivo
+                </span>
+                <h2 className="text-3xl font-display font-extrabold text-white mt-4">
+                  Documentos incluidos en tu suscripción
+                </h2>
+                <p className="text-slate-400 text-sm mt-3 max-w-lg mx-auto">
+                  Accede a reportes, informes, guías e investigaciones sobre economía, política fiscal y gestión pública en el Perú.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {reports.slice(0, 8).map((doc, i) => (
+                  <motion.div
+                    key={doc.id}
+                    className="relative group rounded-2xl overflow-hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: i * 0.07 }}
+                  >
+                    {/* Card background */}
+                    <div
+                      className="aspect-[3/4] p-5 flex flex-col justify-between"
+                      style={{ background: `linear-gradient(135deg, ${doc.config.color}dd, ${doc.config.color}99)` }}
+                    >
+                      <div>
+                        <span className="text-[9px] font-black uppercase tracking-wider text-white/60">
+                          {doc.publicationType}
+                        </span>
+                        <h3 className="text-sm font-bold text-white mt-2 leading-snug line-clamp-3">
+                          {doc.title}
+                        </h3>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] text-white/50">{doc.date}</span>
+                        <span className="text-[10px] font-bold text-white/70 px-2 py-0.5 rounded-full border border-white/20">
+                          {doc.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Lock overlay */}
+                    <div className="absolute inset-0 bg-navy-950/50 backdrop-blur-[3px] flex items-center justify-center group-hover:bg-navy-950/60 transition-colors">
+                      <div className="text-center">
+                        <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-3">
+                          <Lock className="w-6 h-6 text-white" />
+                        </div>
+                        <p className="text-white font-bold text-xs">Bloqueado</p>
+                        <p className="text-white/50 text-[10px] mt-1">Suscríbete para acceder</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="text-center mt-8">
+                <a
+                  href="/reportes"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-brand-400 hover:text-brand-300 transition-colors"
+                >
+                  Ver todas las publicaciones
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
         </main>
