@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ShieldCheck,
   Lock,
+  Eye,
   CheckCircle2,
   LayoutDashboard,
   X,
@@ -146,6 +147,7 @@ function PlanIcon({ icon: Icon, category }: { icon: React.ElementType; category:
 /* ======================== */
 export default function SuscripcionesPage() {
   const [paymentModal, setPaymentModal] = useState(false);
+  const [previewDoc, setPreviewDoc] = useState<(typeof reports)[number] | null>(null);
   const [paymentStep, setPaymentStep] = useState<1 | 2 | 3 | 4>(1);
   const [selectedPlan, setSelectedPlan] = useState<(typeof plans)[number] | null>(null);
   const [paymentError, setPaymentError] = useState("");
@@ -379,9 +381,101 @@ export default function SuscripcionesPage() {
                 </span>
               </h1>
               <div className="mb-10" />
-            </header>
 
-            {/* Plan Grid */}
+            {/* ========== CONTENIDO EXCLUSIVO - DOCUMENTOS PREVIEW ========== */}
+            <div className="mb-20">
+              <div className="text-center mb-10">
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-100 rounded-full text-xs font-bold text-brand-700 uppercase tracking-wider mb-4">
+                  <Lock className="w-3.5 h-3.5" />
+                  Contenido exclusivo
+                </span>
+                <h2 className="text-3xl font-display font-extrabold text-white mt-4">
+                  Documentos incluidos en tu suscripción
+                </h2>
+                <p className="text-slate-400 text-sm mt-3 max-w-lg mx-auto">
+                  Las primeras 2 páginas son visibles. Suscríbete para acceder al documento completo.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {reports.slice(0, 8).map((doc, i) => {
+                  const totalPages = doc.id === 30 ? 26 : doc.id === 31 ? 8 : null;
+                  return (
+                    <motion.div
+                      key={doc.id}
+                      className="relative group rounded-2xl overflow-hidden bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.07 }}
+                      onClick={() => setPreviewDoc(doc)}
+                    >
+                      <div className="px-4 py-3 bg-navy-950 flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full" style={{ background: doc.config.color }} />
+                        <h3 className="text-[11px] font-bold text-white truncate flex-1">
+                          {doc.title}
+                        </h3>
+                      </div>
+
+                      <div className="relative bg-slate-100">
+                        <div className="relative aspect-[3/4] overflow-hidden">
+                          <img
+                            src={`/previews/${doc.id}/page-1.jpg`}
+                            alt={doc.title}
+                            className="w-full h-full object-cover object-top"
+                            loading="lazy"
+                          />
+                          <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                            <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                              2 de {totalPages || '?'} páginas visibles
+                            </span>
+                            <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                              {doc.publicationType}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="absolute inset-0 bg-navy-950/0 group-hover:bg-navy-950/30 transition-colors flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white rounded-xl shadow-xl px-4 py-2.5 flex items-center gap-2">
+                            <Eye className="w-4 h-4 text-brand-700" />
+                            <span className="text-xs font-bold text-navy-950">Visualizar</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="px-4 py-2.5 bg-white border-t border-slate-100 flex items-center justify-between">
+                        <span className="text-[10px] text-slate-400">{doc.date}</span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ color: doc.config.color, background: `${doc.config.color}15` }}>
+                          {doc.category}
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <div className="text-center mt-8">
+                <a
+                  href="/reportes"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-brand-400 hover:text-brand-300 transition-colors"
+                >
+                  Ver todas las publicaciones
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* ========== PLANES DE SUSCRIPCION ========== */}
+            <span className="pricing-premium__pill">
+              Niveles de Acceso Técnico
+            </span>
+            <h2 className="text-3xl font-display font-extrabold text-white mt-4 text-center">
+              Invierta en su{" "}
+              <span className="pricing-premium__title-accent">
+                Visión Estratégica
+              </span>
+            </h2>
+            <div className="mb-10" />
+
             <Section id="planes" className="mb-16" ariaLabel="Planes de suscripción">
             <div className="plan-grid-v4">
               {plans.map((p, i) => {
@@ -490,94 +584,7 @@ export default function SuscripcionesPage() {
               </p>
             </div>
 
-                        {/* Documentos con preview de primeras paginas + candado */}
-            <div className="mt-20">
-              <div className="text-center mb-10">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-100 rounded-full text-xs font-bold text-brand-700 uppercase tracking-wider mb-4">
-                  <Lock className="w-3.5 h-3.5" />
-                  Contenido exclusivo
-                </span>
-                <h2 className="text-3xl font-display font-extrabold text-white mt-4">
-                  Documentos incluidos en tu suscripción
-                </h2>
-                <p className="text-slate-400 text-sm mt-3 max-w-lg mx-auto">
-                  Vista previa de las primeras 3 páginas. Suscríbete para acceder al documento completo.
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {reports.slice(0, 8).map((doc, i) => (
-                  <motion.div
-                    key={doc.id}
-                    className="relative group rounded-2xl overflow-hidden bg-white shadow-lg"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: i * 0.07 }}
-                  >
-                    {/* Document title bar */}
-                    <div className="px-4 py-3 bg-navy-950 flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full" style={{ background: doc.config.color }} />
-                      <h3 className="text-[11px] font-bold text-white truncate flex-1">
-                        {doc.title}
-                      </h3>
-                    </div>
-
-                    {/* PDF Pages Preview */}
-                    <div className="relative bg-slate-100">
-                      <div className="relative aspect-[3/4] overflow-hidden">
-                        <img
-                          src={`/previews/${doc.id}/page-1.jpg`}
-                          alt={doc.title}
-                          className="w-full h-full object-cover object-top"
-                          loading="lazy"
-                        />
-
-                        {/* Page indicator */}
-                        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                          <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                            Página 1 de {doc.id === 30 ? '26' : doc.id === 31 ? '8' : '?'}
-                          </span>
-                          <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                            {doc.publicationType}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Locked pages overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-950/90 via-navy-950/70 to-navy-950/30 flex flex-col items-center justify-center pb-8 pt-16">
-                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-3">
-                          <Lock className="w-5 h-5 text-white" />
-                        </div>
-                        <p className="text-white font-bold text-xs">Páginas 2 en adelante</p>
-                        <p className="text-white/50 text-[10px] mt-1">bloqueadas</p>
-                      </div>
-                    </div>
-
-                    {/* Bottom info bar */}
-                    <div className="px-4 py-2.5 bg-white border-t border-slate-100 flex items-center justify-between">
-                      <span className="text-[10px] text-slate-400">{doc.date}</span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ color: doc.config.color, background: `${doc.config.color}15` }}>
-                        {doc.category}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="text-center mt-8">
-                <a
-                  href="/reportes"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-brand-400 hover:text-brand-300 transition-colors"
-                >
-                  Ver todas las publicaciones
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
-
-          </div>
-        </main>
+</main>
 
         <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
         <Footer />
