@@ -382,13 +382,14 @@ export default function SuscripcionesPage() {
                   Documentos incluidos en tu suscripción
                 </h2>
                 <p className="text-slate-400 text-sm mt-3 max-w-lg mx-auto">
-                  Las primeras 2 páginas son visibles. Suscríbete para acceder al documento completo.
+                  Vista previa de los documentos incluidos. Suscríbete para acceso completo.
                 </p>
               </div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {reports.slice(0, 8).map((doc, i) => {
                   const totalPages = doc.id === 30 ? 26 : doc.id === 31 ? 8 : null;
+                  const freePages = doc.id === 30 || doc.id === 31 ? 2 : 1;
                   return (
                     <motion.div
                       key={doc.id}
@@ -407,7 +408,7 @@ export default function SuscripcionesPage() {
                         <div className="relative aspect-[3/4] overflow-hidden">
                           <img src={`/previews/${doc.id}/page-1.jpg`} alt={doc.title} className="w-full h-full object-cover object-top" loading="lazy" />
                           <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                            <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">2 de {totalPages || "?"} páginas visibles</span>
+                            <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">{freePages} de {totalPages || "?"} páginas visibles</span>
                             <span className="text-[9px] font-bold text-white bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-full">{doc.publicationType}</span>
                           </div>
                         </div>
@@ -447,11 +448,11 @@ export default function SuscripcionesPage() {
               {plans.map((p, i) => {
                 const IconComp = p.icon;
                 return (
-                  <motion.article key={p.id} className={`plan-card-v4 \${p.recommended ? "plan-card-v4--recommended" : ""} \${p.category === "premium" ? "plan-card-v4--premium" : ""}`} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }}>
-                    {p.badge && <span className={`plan-card-v4__badge \${p.badgeType === "recommended" ? "plan-card-v4__badge--recommended" : "plan-card-v4__badge--promo"}`}>{p.badge}</span>}
+                  <motion.article key={p.id} className={`plan-card-v4 ${p.recommended ? "plan-card-v4--recommended" : ""} ${p.category === "premium" ? "plan-card-v4--premium" : ""}`} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }}>
+                    {p.badge && <span className={`plan-card-v4__badge ${p.badgeType === "recommended" ? "plan-card-v4__badge--recommended" : "plan-card-v4__badge--promo"}`}>{p.badge}</span>}
                     <PlanIcon icon={IconComp} category={p.category} />
                     <div className="plan-card-v4__content">
-                      <p className={`plan-card-v4__category \${p.category === "premium" ? "plan-card-v4__category--premium" : "plan-card-v4__category--basic"}`}>{p.kicker}</p>
+                      <p className={`plan-card-v4__category ${p.category === "premium" ? "plan-card-v4__category--premium" : "plan-card-v4__category--basic"}`}>{p.kicker}</p>
                       <h3 className="plan-card-v4__name">{p.name}</h3>
                       <p className="plan-card-v4__description">{p.description}</p>
                     </div>
@@ -462,7 +463,7 @@ export default function SuscripcionesPage() {
                       <span className="text-lg font-bold ml-1 opacity-50">/{p.period.includes("año") ? "año" : "mes"}</span>
                     </div></div>
                     <div className="plan-card-v4__features">{p.features.map((f, fi) => { const FIcon = f.icon; return (<div key={fi} className="plan-card-v4__feature"><FIcon className="w-4 h-4 text-emerald-500" /><span>{f.text}</span></div>); })}</div>
-                    <button onClick={() => handleSubscribe(p)} className={`plan-card-v4__cta \${p.category === "premium" ? "plan-card-v4__cta--premium" : "plan-card-v4__cta--primary"}`}>Suscribirse <ArrowRight className="w-4 h-4" /></button>
+                    <button onClick={() => handleSubscribe(p)} className={`plan-card-v4__cta ${p.category === "premium" ? "plan-card-v4__cta--premium" : "plan-card-v4__cta--primary"}`}>Suscribirse <ArrowRight className="w-4 h-4" /></button>
                   </motion.article>
                 );
               })}
@@ -477,7 +478,8 @@ export default function SuscripcionesPage() {
                 <a href="mailto:consultas@inpulsofiscal.com" className="text-brand-600 font-bold hover:underline">consultas@inpulsofiscal.com</a>
               </p>
             </div>
-</main>
+          </div>
+        </main>
 
         <SectionNav items={SECTIONS} activeId={activeId} onSelect={scrollToSection} />
         <Footer />
@@ -542,17 +544,19 @@ export default function SuscripcionesPage() {
                     <p className="text-center text-[10px] font-bold text-slate-400 mt-2">Página 1</p>
                   </div>
 
-                  {/* Page 2 - fully visible */}
-                  <div className="p-4 pb-2">
-                    <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                      <img
-                        src={`/previews/${previewDoc.id}/page-2.jpg`}
-                        alt="Página 2"
-                        className="w-full h-auto"
-                      />
+                  {/* Page 2 - fully visible (only if preview exists) */}
+                  {(previewDoc.id === 30 || previewDoc.id === 31) && (
+                    <div className="p-4 pb-2">
+                      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                        <img
+                          src={`/previews/${previewDoc.id}/page-2.jpg`}
+                          alt="Página 2"
+                          className="w-full h-auto"
+                        />
+                      </div>
+                      <p className="text-center text-[10px] font-bold text-slate-400 mt-2">Página 2</p>
                     </div>
-                    <p className="text-center text-[10px] font-bold text-slate-400 mt-2">Página 2</p>
-                  </div>
+                  )}
 
                   {/* Pages 3+ - LOCKED */}
                   <div className="px-4 pb-6">
